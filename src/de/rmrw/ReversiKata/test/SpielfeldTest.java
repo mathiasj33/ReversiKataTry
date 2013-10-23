@@ -26,7 +26,7 @@ public class SpielfeldTest {
 		spielfeld.setForInit(Colors.BLACK,new Pos(1,3));
 		spielfeld.setForInit(Colors.WHITE,new Pos(2,1));
 		spielfeld.setForInit(Colors.WHITE,new Pos(2,3));
-		spielfeld.setForInit(Colors.BLACL,new Pos(3,2));
+		spielfeld.setForInit(Colors.BLACK,new Pos(3,2));
 
 	}
 
