@@ -1,10 +1,12 @@
 package de.rmrw.ReversiKata.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import de.rmrw.ReversiKata.code.Colors;
+import de.rmrw.ReversiKata.code.Pos;
+import de.rmrw.ReversiKata.code.Spielfeld;
 
 public class SpielfeldTest {
 	
@@ -27,7 +29,6 @@ public class SpielfeldTest {
 		spielfeld.setForInit(Colors.WHITE,new Pos(2,1));
 		spielfeld.setForInit(Colors.WHITE,new Pos(2,3));
 		spielfeld.setForInit(Colors.BLACK,new Pos(3,2));
-
 	}
 
 	@Test
@@ -35,7 +36,7 @@ public class SpielfeldTest {
 		String s = spielfeld.toString();
 		Assert.assertEquals("o o o b"+System.getProperty("line.separator")+
 							"o o w b"+System.getProperty("line.separator")+
-							"o w o b"+System.getProperty("line.separator")+
+							"o w o w"+System.getProperty("line.separator")+
 							"o o b o"+System.getProperty("line.separator"),
 							s);
 	}
