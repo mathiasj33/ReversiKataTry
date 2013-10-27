@@ -1,8 +1,8 @@
 package de.rmrw.ReversiKata.test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -12,7 +12,6 @@ import org.junit.Test;
 import de.rmrw.ReversiKata.code.Colors;
 import de.rmrw.ReversiKata.code.Pos;
 import de.rmrw.ReversiKata.code.Spielfeld;
-import de.rmrw.ReversiKata.code.SpielfeldIterator;
 
 public class SpielfeldTest {
 	

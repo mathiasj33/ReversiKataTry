@@ -50,7 +50,6 @@ public class Spielfeld {
 				}
 			}
 		}
-		System.out.println(s);
 		return s;
 	}
 
@@ -60,7 +59,16 @@ public class Spielfeld {
 	}
 
 	public Set<Pos> woKann(Colors color) {
+		ArrayList<Pos> possiblePos = new ArrayList<Pos>();
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				possiblePos.add(new Pos(i,j));
+			}
+		}
 		Set<Pos> result = new HashSet<Pos>();
+		for(Pos p : possiblePos) {
+			if(esGibtEinenWegVonPosZuFarbe(p,color)) result.add(p);
+		}
 		return result;
 	}
 
