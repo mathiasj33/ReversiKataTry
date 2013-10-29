@@ -12,6 +12,11 @@ public class Spielfeld {
 	
 	public Spielfeld(int s) {
 		size = s;
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				map.put(new Pos(i,j), null);
+			}
+		}
 	}
 	
 	public void setForInit(Colors c, Pos p) {
@@ -70,6 +75,19 @@ public class Spielfeld {
 			if(esGibtEinenWegVonPosZuFarbe(p,color)) result.add(p);
 		}
 		return result;
+	}
+	
+	public int size() {
+		return size;
+	}
+	
+	public boolean contains(Pos p) {
+		if(map.containsKey(p)) return true;
+		return false;
+	}
+	
+	public HashMap<Pos, Colors> getMap() {
+		return map;
 	}
 
 }

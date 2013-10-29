@@ -1,21 +1,58 @@
 package de.rmrw.ReversiKata.code;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class NeighbourIterator implements Iterator<Pos> {
+	
+	private ArrayList<Pos> positions = new ArrayList<Pos>();
+	private int currentNumber = 0;
 
 	public NeighbourIterator(Spielfeld spielfeld, Pos pos) {
-		throw new RuntimeException("noch nicht implementiert");
+		if(!spielfeld.contains(pos)) throw new RuntimeException("Pos nicht enthalten");
+		for(int i = 0; i < 8; i++) {
+			switch(i) {
+			case 0: {
+				if(spielfeld.contains(new Pos(pos.getX(), pos.getY() + 1))) positions.add(new Pos(pos.getX(), pos.getY() + 1));
+			}
+			case 1: {
+				if(spielfeld.contains(new Pos(pos.getX(), pos.getY() - 1))) positions.add(new Pos(pos.getX(), pos.getY() - 1));
+			}
+			case 2: {
+				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY()))) positions.add(new Pos(pos.getX() + 1, pos.getY()));
+			}
+			case 3: {
+				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY()))) positions.add(new Pos(pos.getX() - 1, pos.getY()));
+			}
+			case 4: {
+				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY() + 1))) positions.add(new Pos(pos.getX() + 1, pos.getY() + 1));
+			}
+			case 5: {
+				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY() - 1))) positions.add(new Pos(pos.getX() + 1, pos.getY() - 1));
+			}
+			case 6: {
+				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY() + 1))) positions.add(new Pos(pos.getX() - 1, pos.getY() + 1));
+			}
+			case 7: {
+				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY() - 1))) positions.add(new Pos(pos.getX() - 1, pos.getY() - 1));
+			}
+			}
+		}
 	}
 
 	@Override
 	public boolean hasNext() {
-		throw new RuntimeException("noch nicht implementiert");
+		if(currentNumber < positions.size()) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public Pos next() {
-		throw new RuntimeException("noch nicht implementiert");
+		Pos p =  positions.get(currentNumber);
+		currentNumber += 1;
+		return p;
 	}
 
 	@Override

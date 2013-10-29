@@ -76,6 +76,12 @@ public class SpielfeldTest {
 		Assert.assertTrue(ergebnisMenge.contains(new Pos(3,3)));
 		Assert.assertFalse(ergebnisMenge.contains(new Pos(3,2)));
 	}
+	
+	@Test
+	public void testContains() {
+		Assert.assertTrue(spielfeld.contains(new Pos(3,1)));
+		Assert.assertFalse(spielfeld.contains(new Pos(4,0)));
+	}
 
 
 }
