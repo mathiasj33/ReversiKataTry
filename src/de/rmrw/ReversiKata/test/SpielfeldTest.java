@@ -59,7 +59,7 @@ public class SpielfeldTest {
 		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(1,2),Colors.BLACK);
 		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(1,3),Colors.BLACK);
 		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(2,0),Colors.BLACK);
-		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(2,1),Colors.BLACK);
+		doReturn(true ).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(2,1),Colors.BLACK); // korrigiert von false auf true, Robert 29.10.
 		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(2,2),Colors.BLACK);
 		doReturn(false).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(2,3),Colors.BLACK);
 		doReturn(true ).when(spySpielfeld).esGibtEinenWegVonPosZuFarbe(new Pos(3,0),Colors.BLACK);
@@ -75,6 +75,7 @@ public class SpielfeldTest {
 		Assert.assertTrue(ergebnisMenge.contains(new Pos(3,0)));
 		Assert.assertTrue(ergebnisMenge.contains(new Pos(3,3)));
 		Assert.assertFalse(ergebnisMenge.contains(new Pos(3,2)));
+		Assert.assertFalse(ergebnisMenge.contains(new Pos(2,1))); // hinzugefügt, Robert 29.10.
 	}
 	
 	@Test
