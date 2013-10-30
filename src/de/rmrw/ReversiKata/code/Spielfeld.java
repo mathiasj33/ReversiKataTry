@@ -1,6 +1,5 @@
 package de.rmrw.ReversiKata.code;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,15 +63,9 @@ public class Spielfeld {
 	}
 
 	public Set<Pos> woKann(Colors color) {
-		ArrayList<Pos> possiblePos = new ArrayList<Pos>();
-		for(int i = 0; i < size; i++) {
-			for(int j = 0; j < size; j++) {
-				possiblePos.add(new Pos(i,j));
-			}
-		}
 		Set<Pos> result = new HashSet<Pos>();
-		for(Pos p : possiblePos) {
-			if(esGibtEinenWegVonPosZuFarbe(p,color)) result.add(p);
+		for(Pos p : map.keySet()) {
+			if(esGibtEinenWegVonPosZuFarbe(p,color) && map.get(p) == null) result.add(p);
 		}
 		return result;
 	}

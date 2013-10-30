@@ -3,12 +3,18 @@ package de.rmrw.ReversiKata.code;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class NeighbourIterator implements Iterator<Pos> {
+public class ReversiIterator implements Iterator<Pos> {
 	
 	private ArrayList<Pos> positions = new ArrayList<Pos>();
 	private int currentNumber = 0;
 
-	public NeighbourIterator(Spielfeld spielfeld, Pos pos) {
+	public ReversiIterator(Spielfeld spielfeld) {
+		for(Pos p : spielfeld.getMap().keySet()) {
+			positions.add(p);
+		}
+	}
+	
+	public ReversiIterator(Spielfeld spielfeld, Pos pos) {
 		if(!spielfeld.contains(pos)) throw new RuntimeException("Pos nicht enthalten");
 		for(int i = 0; i < 8; i++) {
 			switch(i) {

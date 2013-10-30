@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.rmrw.ReversiKata.code.Pos;
+import de.rmrw.ReversiKata.code.ReversiIterator;
 import de.rmrw.ReversiKata.code.Spielfeld;
-import de.rmrw.ReversiKata.code.SpielfeldIterator;
 
 public class SpielfeldIteratorTest {
 	
@@ -23,7 +23,7 @@ public class SpielfeldIteratorTest {
 	@Test
 	public void testSpielfeldIterator()  {
 		Set<Pos> resultSet = new HashSet<Pos>();
-		SpielfeldIterator sI = new SpielfeldIterator(sf);
+		ReversiIterator sI = new ReversiIterator(sf);
 		while (sI.hasNext()){
 			resultSet.add(sI.next());
 		}
