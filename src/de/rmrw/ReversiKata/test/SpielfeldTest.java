@@ -84,5 +84,16 @@ public class SpielfeldTest {
 		Assert.assertFalse(spielfeld.contains(new Pos(4,0)));
 	}
 
-
+	@Test
+	public void testEsGibtEinenWegVonPosZuFarbe() {
+		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(0,2),Colors.BLACK));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0),Colors.BLACK));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,0),Colors.BLACK));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(2,1),Colors.BLACK)); 
+		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,1),Colors.BLACK));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,3),Colors.BLACK));
+		spielfeld.setForInit(Colors.WHITE,new Pos(3,3));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,1),Colors.WHITE));
+		
+	}
 }

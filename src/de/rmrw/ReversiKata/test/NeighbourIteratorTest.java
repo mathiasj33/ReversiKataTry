@@ -42,14 +42,12 @@ public class NeighbourIteratorTest {
 		while (nit.hasNext()){
 			resultSet.add(nit.next());
 		}
+		Assert.assertEquals(5, resultSet.size());
 		Assert.assertTrue(resultSet.contains(new Pos(3,0)));
 		Assert.assertTrue(resultSet.contains(new Pos(2,0)));
 		Assert.assertTrue(resultSet.contains(new Pos(2,1)));
 		Assert.assertTrue(resultSet.contains(new Pos(2,2)));
 		Assert.assertTrue(resultSet.contains(new Pos(3,2)));
-
-		Assert.assertFalse(resultSet.contains(new Pos(4,0)));
-		Assert.assertFalse(resultSet.contains(new Pos(1,0)));
 	}
 
 }
