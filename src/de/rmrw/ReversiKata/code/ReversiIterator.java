@@ -45,6 +45,50 @@ public class ReversiIterator implements Iterator<Pos> {
 			}
 		}
 	}
+	
+	public ReversiIterator(Spielfeld spielfeld, Pos startPos, Pos dirPos) {
+		positions.add(startPos);
+		if(dirPos.equals(new Pos(1,0))) {
+			for(int i = startPos.getX(); i < spielfeld.size(); i++) {
+				positions.add(new Pos(i,startPos.getY()));
+			}
+		}
+		else if(dirPos.equals(new Pos(-1,0))) {
+			for(int i = startPos.getX(); i >= 0; i--) {
+				positions.add(new Pos(i,startPos.getY()));
+			}
+		}
+		else if(dirPos.equals(new Pos(0,1))) {
+			for(int i = startPos.getY(); i >= 0; i--) {
+				positions.add(new Pos(startPos.getX(),i));
+			}
+		}
+		else if(dirPos.equals(new Pos(0,-1))) {
+			for(int i = startPos.getY(); i < spielfeld.size(); i++) {
+				positions.add(new Pos(startPos.getX(),i));
+			}
+		}
+		else if(dirPos.equals(new Pos(1,1))) {
+			for(int i = startPos.getY(); i > 0; i--) {
+				positions.add(new Pos(positions.get(positions.size() - 1).getX() + 1,positions.get(positions.size() - 1).getY() - 1));
+			}
+		}
+		else if(dirPos.equals(new Pos(-1,1))) {
+			for(int i = startPos.getX(); i > 0; i--) {
+				positions.add(new Pos(positions.get(positions.size() - 1).getX() - 1,positions.get(positions.size() - 1).getY() - 1));
+			}
+		}
+		else if(dirPos.equals(new Pos(1,-1))) {
+			for(int i = spielfeld.size() - 1 - startPos.getX(); i > 0; i--) {
+				positions.add(new Pos(positions.get(positions.size() - 1).getX() + 1,positions.get(positions.size() - 1).getY() + 1));
+			}
+		}
+		else if(dirPos.equals(new Pos(-1,-1))) {
+			for(int i = startPos.getX(); i > 0; i--) {
+				positions.add(new Pos(positions.get(positions.size() - 1).getX() - 1,positions.get(positions.size() - 1).getY() + 1));
+			}
+		}
+	}
 
 	@Override
 	public boolean hasNext() {

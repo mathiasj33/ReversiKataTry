@@ -1,5 +1,6 @@
 package de.rmrw.ReversiKata.code;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class Spielfeld {
 		if(size <= p.getX() || size <= p.getY()) {
 			throw new RuntimeException("Position ausserhalb des Spielfelds");
 		}
-		map.put(p,c);
+		map.put(p, c);
 	}
 	
 	@Override
@@ -45,6 +46,7 @@ public class Spielfeld {
 					}
 				}
 				else if(map.get(new Pos(i,j)) != null && j == size - 1) {
+					System.out.println("true");
 					if(map.get(new Pos(i,j)).equals(Colors.BLACK)) {
 						s += "b" + System.getProperty("line.separator");
 					}
@@ -58,7 +60,29 @@ public class Spielfeld {
 	}
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
-		// TODO Auto-generated method stub
+		ArrayList<Pos> colorPositions = new ArrayList<Pos>();
+		for(Pos p : map.keySet()) {
+			if(map.get(p) == color) {
+				colorPositions.add(p);
+			}
+		}
+		Set<Pos> lineIteratorList = new HashSet<Pos>();
+		Pos[] dirPos = new Pos[]{
+				new Pos(1,0),new Pos(0,1),new Pos(-1,0),new Pos(0,-1),new Pos(1,1),new Pos(-1,-1),new Pos(-1,1),new Pos(1,-1)
+		};
+		for(int i = 0; i < 8; i++) {
+			ReversiIterator lI = new ReversiIterator(this, pos, dirPos[i]);
+			while(lI.hasNext()) {
+				lineIteratorList.add(lI.next()); //Diese Liste hat jetzt alle Pos, die auf Linien von startPos liegen
+			}
+		}
+		for(Pos lP : lineIteratorList) {
+			for(Pos cP : colorPositions) {
+				if(lP.equals(cP)) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 

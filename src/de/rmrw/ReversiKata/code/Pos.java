@@ -10,6 +10,9 @@ public class Pos {
 		this.setY(y);
 	}
 
+
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -17,6 +20,8 @@ public class Pos {
 		result = prime * result + y;
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -34,6 +39,8 @@ public class Pos {
 		return true;
 	}
 
+
+
 	public int getX() {
 		return x;
 	}
@@ -48,6 +55,10 @@ public class Pos {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+	
+	public String toString() {
+		return new String("X: " + x + " Y: " + y);
 	}
 
 }
