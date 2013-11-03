@@ -28,19 +28,28 @@ public class SpielfeldTest {
 		//
 		
 		spielfeld = new Spielfeld(4); // 4x4-Spielfeld
+		spielfeld.setForInit(Colors.BLACK,new Pos(0,3));
 		spielfeld.setForInit(Colors.WHITE,new Pos(1,2));
+		spielfeld.setForInit(Colors.BLACK,new Pos(1,3));
 		spielfeld.setForInit(Colors.WHITE,new Pos(2,1));
-		spielfeld.setForInit(Colors.BLACK,new Pos(2,3));
-		spielfeld.setForInit(Colors.WHITE,new Pos(3,2));
-		spielfeld.setForInit(Colors.BLACK,new Pos(3,0));
-		spielfeld.setForInit(Colors.BLACK,new Pos(3,1));
+		spielfeld.setForInit(Colors.WHITE,new Pos(2,3));
+		spielfeld.setForInit(Colors.BLACK,new Pos(3,2));
 	}
 	
 	@Test
 	public void testSetForInit() {
 		Assert.assertTrue(spielfeld.getMap().get(new Pos(1,2)) == Colors.WHITE);
-		Assert.assertTrue(spielfeld.getMap().get(new Pos(3,0)) == Colors.BLACK);
+		Assert.assertTrue(spielfeld.getMap().get(new Pos(0,3)) == Colors.BLACK);
 	}
+	
+	@Test 
+	public final void testGetColor() {
+		Assert.assertNull(spielfeld.getColor(new Pos(0,1)));
+		Assert.assertNull(spielfeld.getColor(new Pos(2,2)));
+		Assert.assertEquals(Colors.BLACK, spielfeld.getColor(new Pos(0,3)));
+		Assert.assertEquals(Colors.WHITE, spielfeld.getColor(new Pos(2,1)));
+	}
+	
 
 	@Test
 	public final void testToString() {
@@ -90,19 +99,25 @@ public class SpielfeldTest {
 		Assert.assertFalse(spielfeld.contains(new Pos(4,0)));
 	}
 
+	
+	// Spalte:       0  1  2  3
+	//
+	// Zeile 0:      o  o  o  b
+	// Zeile 1:     (b)(b) w  b
+	// Zeile 2:      o  w  o  w
+	// Zeile 3:     (b) o  b (b)
+	//
+
 	@Test
 	public void testEsGibtEinenWegVonPosZuFarbe() {
 		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(0,2),Colors.BLACK));
 		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0),Colors.BLACK));
 		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,0),Colors.BLACK));
 		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(2,1),Colors.BLACK)); 
-		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,1),Colors.BLACK));
+		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,1),Colors.BLACK));
 		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,3),Colors.BLACK));
 		spielfeld.setForInit(Colors.WHITE,new Pos(3,3));
 		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(3,1),Colors.WHITE));
-		spielfeld = new Spielfeld(4);
-		spielfeld.setForInit(Colors.BLACK, new Pos(0,0));
-		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,2), Colors.BLACK));
 		
 	}
 }

@@ -1,6 +1,5 @@
 package de.rmrw.ReversiKata.code;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,32 +59,35 @@ public class Spielfeld {
 	}
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
-		ArrayList<Pos> colorPositions = new ArrayList<Pos>();
-		for(Pos p : map.keySet()) {
-			if(map.get(p) == color) {
-				colorPositions.add(p);
-			}
-		}
-		Set<Pos> lineIteratorList = new HashSet<Pos>();
+
 		Pos[] dirPos = new Pos[]{
 				new Pos(1,0),new Pos(0,1),new Pos(-1,0),new Pos(0,-1),new Pos(1,1),new Pos(-1,-1),new Pos(-1,1),new Pos(1,-1)
 		};
+		
 		for(int i = 0; i < 8; i++) {
 			ReversiIterator lI = new ReversiIterator(this, pos, dirPos[i]);
-			while(lI.hasNext()) {
-				lineIteratorList.add(lI.next()); //Diese Liste hat jetzt alle Pos, die auf Linien von startPos liegen
-			}
-		}
-		for(Pos lP : lineIteratorList) {
-			for(Pos cP : colorPositions) {
-				if(lP.equals(cP)) {
+			lI.next(); // Start-Position überspringen 
+
+			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben
+			if (!lI.hasNext()) continue;
+			Pos neighbourPos = lI.next(); 
+			if (getColor(neighbourPos)==null || getColor(neighbourPos).equals(color))
+				continue;
+			
+			// Unsere Startposition hat jetzt also einen Nachbarn in der anderen Farbe.
+			// Auf dem weiteren Weg müssen wir jetzt wieder einen in der gleichen Farbe finden:
+			while (lI.hasNext()) {
+				Pos nextPosInLine = lI.next();
+				if (getColor(nextPosInLine)==null)
+					break; // Lücke
+				if (getColor(nextPosInLine).equals(color))
 					return true;
-				}
 			}
 		}
 		return false;
 	}
 
+	
 	public Set<Pos> woKann(Colors color) {
 		Set<Pos> result = new HashSet<Pos>();
 		for(Pos p : map.keySet()) {
@@ -105,6 +107,10 @@ public class Spielfeld {
 	
 	public HashMap<Pos, Colors> getMap() {
 		return map;
+	}
+
+	public Colors getColor(Pos pos) {
+		return map.get(pos);
 	}
 
 }

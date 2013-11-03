@@ -49,22 +49,22 @@ public class ReversiIterator implements Iterator<Pos> {
 	public ReversiIterator(Spielfeld spielfeld, Pos startPos, Pos dirPos) {
 		positions.add(startPos);
 		if(dirPos.equals(new Pos(1,0))) {
-			for(int i = startPos.getX(); i < spielfeld.size(); i++) {
+			for(int i = startPos.getX()+1; i < spielfeld.size(); i++) {
 				positions.add(new Pos(i,startPos.getY()));
 			}
 		}
 		else if(dirPos.equals(new Pos(-1,0))) {
-			for(int i = startPos.getX(); i >= 0; i--) {
+			for(int i = startPos.getX()-1; i >= 0; i--) {
 				positions.add(new Pos(i,startPos.getY()));
 			}
 		}
 		else if(dirPos.equals(new Pos(0,1))) {
-			for(int i = startPos.getY(); i >= 0; i--) {
+			for(int i = startPos.getY()-1; i >= 0; i--) {
 				positions.add(new Pos(startPos.getX(),i));
 			}
 		}
 		else if(dirPos.equals(new Pos(0,-1))) {
-			for(int i = startPos.getY(); i < spielfeld.size(); i++) {
+			for(int i = startPos.getY()+1; i < spielfeld.size(); i++) {
 				positions.add(new Pos(startPos.getX(),i));
 			}
 		}

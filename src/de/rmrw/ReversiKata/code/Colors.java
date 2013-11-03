@@ -13,4 +13,11 @@ public enum Colors {
 			return new String("w");
 	}
 	
+	public Colors getOppositeColor()
+	{
+		if (this.equals(Colors.BLACK))
+			return Colors.WHITE;
+		return Colors.BLACK;
+	}
+	
 }
