@@ -16,77 +16,19 @@ public class ReversiIterator implements Iterator<Pos> {
 	
 	public ReversiIterator(Spielfeld spielfeld, Pos pos) {
 		if(!spielfeld.contains(pos)) throw new RuntimeException("Pos nicht enthalten");
+		Pos[] array = new Pos[] {
+			new Pos(pos.getX(), pos.getY() + 1),new Pos(pos.getX(), pos.getY() - 1),new Pos(pos.getX() + 1, pos.getY()),new Pos(pos.getX() - 1, pos.getY()),new Pos(pos.getX() + 1, pos.getY() + 1),new Pos(pos.getX() + 1, pos.getY() - 1),new Pos(pos.getX() - 1, pos.getY() + 1),new Pos(pos.getX() - 1, pos.getY() - 1)
+		};
 		for(int i = 0; i < 8; i++) {
-			switch(i) {
-			case 0: {
-				if(spielfeld.contains(new Pos(pos.getX(), pos.getY() + 1))) positions.add(new Pos(pos.getX(), pos.getY() + 1));
-			}
-			case 1: {
-				if(spielfeld.contains(new Pos(pos.getX(), pos.getY() - 1))) positions.add(new Pos(pos.getX(), pos.getY() - 1));
-			}
-			case 2: {
-				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY()))) positions.add(new Pos(pos.getX() + 1, pos.getY()));
-			}
-			case 3: {
-				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY()))) positions.add(new Pos(pos.getX() - 1, pos.getY()));
-			}
-			case 4: {
-				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY() + 1))) positions.add(new Pos(pos.getX() + 1, pos.getY() + 1));
-			}
-			case 5: {
-				if(spielfeld.contains(new Pos(pos.getX() + 1, pos.getY() - 1))) positions.add(new Pos(pos.getX() + 1, pos.getY() - 1));
-			}
-			case 6: {
-				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY() + 1))) positions.add(new Pos(pos.getX() - 1, pos.getY() + 1));
-			}
-			case 7: {
-				if(spielfeld.contains(new Pos(pos.getX() - 1, pos.getY() - 1))) positions.add(new Pos(pos.getX() - 1, pos.getY() - 1));
-			}
-			}
+			if(spielfeld.contains(array[i])) positions.add(array[i]);
 		}
 	}
 	
 	public ReversiIterator(Spielfeld spielfeld, Pos startPos, Pos dirPos) {
 		positions.add(startPos);
-		if(dirPos.equals(new Pos(1,0))) {
-			for(int i = startPos.getX()+1; i < spielfeld.size(); i++) {
-				positions.add(new Pos(i,startPos.getY()));
-			}
-		}
-		else if(dirPos.equals(new Pos(-1,0))) {
-			for(int i = startPos.getX()-1; i >= 0; i--) {
-				positions.add(new Pos(i,startPos.getY()));
-			}
-		}
-		else if(dirPos.equals(new Pos(0,1))) {
-			for(int i = startPos.getY()-1; i >= 0; i--) {
-				positions.add(new Pos(startPos.getX(),i));
-			}
-		}
-		else if(dirPos.equals(new Pos(0,-1))) {
-			for(int i = startPos.getY()+1; i < spielfeld.size(); i++) {
-				positions.add(new Pos(startPos.getX(),i));
-			}
-		}
-		else if(dirPos.equals(new Pos(1,1))) {
-			for(int i = startPos.getY(); i > 0; i--) {
-				positions.add(new Pos(positions.get(positions.size() - 1).getX() + 1,positions.get(positions.size() - 1).getY() - 1));
-			}
-		}
-		else if(dirPos.equals(new Pos(-1,1))) {
-			for(int i = startPos.getX(); i > 0; i--) {
-				positions.add(new Pos(positions.get(positions.size() - 1).getX() - 1,positions.get(positions.size() - 1).getY() - 1));
-			}
-		}
-		else if(dirPos.equals(new Pos(1,-1))) {
-			for(int i = spielfeld.size() - 1 - startPos.getX(); i > 0; i--) {
-				positions.add(new Pos(positions.get(positions.size() - 1).getX() + 1,positions.get(positions.size() - 1).getY() + 1));
-			}
-		}
-		else if(dirPos.equals(new Pos(-1,-1))) {
-			for(int i = startPos.getX(); i > 0; i--) {
-				positions.add(new Pos(positions.get(positions.size() - 1).getX() - 1,positions.get(positions.size() - 1).getY() + 1));
-			}
+		while(spielfeld.contains(startPos)) {
+			startPos = startPos.add(dirPos);
+			positions.add(startPos);
 		}
 	}
 

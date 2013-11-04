@@ -60,5 +60,9 @@ public class Pos {
 	public String toString() {
 		return new String("X: " + x + " Y: " + y);
 	}
+	
+	public Pos add(Pos pos2) {
+		return new Pos(x + pos2.getX(), y - pos2.getY());
+	}
 
 }
