@@ -9,7 +9,7 @@ public class ReversiIterator implements Iterator<Pos> {
 	private int currentNumber = 0;
 
 	public ReversiIterator(Spielfeld spielfeld) {
-		for(Pos p : spielfeld.getMap().keySet()) {
+		for(Pos p : spielfeld.getAllPositionsSorted()) {
 			positions.add(p);
 		}
 	}

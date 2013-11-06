@@ -1,5 +1,7 @@
 package de.rmrw.ReversiKata.code;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,7 +15,7 @@ public class Spielfeld {
 		size = s;
 		for(int i = 0; i < size; i++) {
 			for(int j = 0; j < size; j++) {
-				map.put(new Pos(i,j), null);
+				map.put(new Pos(i,j), Colors.VOID);
 			}
 		}
 	}
@@ -28,31 +30,14 @@ public class Spielfeld {
 	@Override
 	public String toString() {
 		String s = "";
-		for(int i = 0; i < size; i++) {
-			for(int j = 0; j < size; j++) {
-				if(map.get(new Pos(i,j)) == null && j != size - 1) {
-					s += "o " ;
-				}
-				else if(map.get(new Pos(i,j)) == null && j == size - 1) {
-					s += "o" + System.getProperty("line.separator");
-				}
-				else if(map.get(new Pos(i,j)) != null && j != size - 1) {
-					if(map.get(new Pos(i,j)).equals(Colors.BLACK)) {
-						s += "b ";
-					}
-					else {
-						s += "w ";
-					}
-				}
-				else if(map.get(new Pos(i,j)) != null && j == size - 1) {
-					System.out.println("true");
-					if(map.get(new Pos(i,j)).equals(Colors.BLACK)) {
-						s += "b" + System.getProperty("line.separator");
-					}
-					else {
-						s += "w" + System.getProperty("line.separator");
-					}
-				}
+		ReversiIterator sI = new ReversiIterator(this);
+		while(sI.hasNext()) {
+			Pos p = sI.next();
+			if(p.getY() == size - 1) { //Wenn es das letzte Element in der Zeile ist
+				s += map.get(p).toString() + System.getProperty("line.separator");
+			}
+			else {
+				s += map.get(p).toString() + " ";
 			}
 		}
 		return s;
@@ -71,14 +56,14 @@ public class Spielfeld {
 			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben
 			if (!lI.hasNext()) continue;
 			Pos neighbourPos = lI.next(); 
-			if (getColor(neighbourPos)==null || getColor(neighbourPos).equals(color))
+			if (getColor(neighbourPos)==Colors.VOID || getColor(neighbourPos) == color)
 				continue;
 			
 			// Unsere Startposition hat jetzt also einen Nachbarn in der anderen Farbe.
 			// Auf dem weiteren Weg müssen wir jetzt wieder einen in der gleichen Farbe finden:
 			while (lI.hasNext()) {
 				Pos nextPosInLine = lI.next();
-				if (getColor(nextPosInLine)==null)
+				if (getColor(nextPosInLine)==Colors.VOID)
 					break; // Lücke
 				if (getColor(nextPosInLine).equals(color))
 					return true;
@@ -91,7 +76,7 @@ public class Spielfeld {
 	public Set<Pos> woKann(Colors color) {
 		Set<Pos> result = new HashSet<Pos>();
 		for(Pos p : map.keySet()) {
-			if(esGibtEinenWegVonPosZuFarbe(p,color) && map.get(p) == null) result.add(p);
+			if(esGibtEinenWegVonPosZuFarbe(p,color) && map.get(p) == Colors.VOID) result.add(p);
 		}
 		return result;
 	}
@@ -105,8 +90,13 @@ public class Spielfeld {
 		return false;
 	}
 	
-	public HashMap<Pos, Colors> getMap() {
-		return map;
+	public ArrayList<Pos> getAllPositionsSorted() {
+		ArrayList<Pos> sortedList = new ArrayList<Pos>();
+		for(Pos p : map.keySet()) {
+			sortedList.add(p);
+		}
+		Collections.sort(sortedList, new PosComparator());
+		return sortedList;
 	}
 
 	public Colors getColor(Pos pos) {

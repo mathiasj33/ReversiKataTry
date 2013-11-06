@@ -2,15 +2,18 @@ package de.rmrw.ReversiKata.code;
 
 public enum Colors {
 	BLACK,
-	WHITE;
+	WHITE,
+	VOID;
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		if (this.equals(Colors.BLACK))
 			return new String("b");
-		else
+		else if(this.equals(Colors.WHITE))
 			return new String("w");
+		else 
+			return new String("o");
 	}
 	
 	public Colors getOppositeColor()

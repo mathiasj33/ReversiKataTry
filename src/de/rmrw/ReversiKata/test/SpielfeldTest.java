@@ -36,16 +36,10 @@ public class SpielfeldTest {
 		spielfeld.setForInit(Colors.BLACK,new Pos(3,2));
 	}
 	
-	@Test
-	public void testSetForInit() {
-		Assert.assertTrue(spielfeld.getMap().get(new Pos(1,2)) == Colors.WHITE);
-		Assert.assertTrue(spielfeld.getMap().get(new Pos(0,3)) == Colors.BLACK);
-	}
-	
 	@Test 
 	public final void testGetColor() {
-		Assert.assertNull(spielfeld.getColor(new Pos(0,1)));
-		Assert.assertNull(spielfeld.getColor(new Pos(2,2)));
+		Assert.assertEquals(spielfeld.getColor(new Pos(0,1)), Colors.VOID);
+		Assert.assertEquals(spielfeld.getColor(new Pos(2,2)), Colors.VOID);
 		Assert.assertEquals(Colors.BLACK, spielfeld.getColor(new Pos(0,3)));
 		Assert.assertEquals(Colors.WHITE, spielfeld.getColor(new Pos(2,1)));
 	}
