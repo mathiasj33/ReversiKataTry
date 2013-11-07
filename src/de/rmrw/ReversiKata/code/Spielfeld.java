@@ -30,14 +30,15 @@ public class Spielfeld {
 	@Override
 	public String toString() {
 		String s = "";
-		ReversiIterator sI = new ReversiIterator(this);
+		SpielfeldIterator sI = new SpielfeldIterator(this);
 		while(sI.hasNext()) {
 			Pos p = sI.next();
+			s += getColor(p);
 			if(p.getY() == size - 1) { //Wenn es das letzte Element in der Zeile ist
-				s += map.get(p).toString() + System.getProperty("line.separator");
+				s += System.getProperty("line.separator");
 			}
 			else {
-				s += map.get(p).toString() + " ";
+				s += " ";
 			}
 		}
 		return s;
@@ -50,7 +51,7 @@ public class Spielfeld {
 		};
 		
 		for(int i = 0; i < 8; i++) {
-			ReversiIterator lI = new ReversiIterator(this, pos, dirPos[i]);
+			LineIterator lI = new LineIterator(this, pos, dirPos[i]);
 			lI.next(); // Start-Position überspringen 
 
 			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben

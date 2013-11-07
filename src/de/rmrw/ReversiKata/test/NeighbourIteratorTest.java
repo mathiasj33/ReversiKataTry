@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.rmrw.ReversiKata.code.Colors;
+import de.rmrw.ReversiKata.code.NeighbourIterator;
 import de.rmrw.ReversiKata.code.Pos;
-import de.rmrw.ReversiKata.code.ReversiIterator;
 import de.rmrw.ReversiKata.code.Spielfeld;
 
 public class NeighbourIteratorTest {
@@ -38,7 +38,7 @@ public class NeighbourIteratorTest {
 	@Test
 	public final void testNeighbourIterator() {
 		Set<Pos> resultSet = new HashSet<Pos>();
-		ReversiIterator nit = new ReversiIterator(spielfeld,new Pos(3,1));
+		NeighbourIterator nit = new NeighbourIterator(spielfeld,new Pos(3,1));
 		while (nit.hasNext()){
 			resultSet.add(nit.next());
 		}
