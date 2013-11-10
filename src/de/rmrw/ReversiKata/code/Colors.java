@@ -20,7 +20,9 @@ public enum Colors {
 	{
 		if (this.equals(Colors.BLACK))
 			return Colors.WHITE;
-		return Colors.BLACK;
+		else if(this.equals(Colors.WHITE))
+				return Colors.BLACK;
+		return null;
 	}
 	
 }

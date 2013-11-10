@@ -38,8 +38,8 @@ public class SpielfeldTest {
 	
 	@Test 
 	public final void testGetColor() {
-		Assert.assertEquals(spielfeld.getColor(new Pos(0,1)), Colors.VOID);
-		Assert.assertEquals(spielfeld.getColor(new Pos(2,2)), Colors.VOID);
+		Assert.assertEquals(Colors.VOID, spielfeld.getColor(new Pos(0,1)));
+		Assert.assertEquals(Colors.VOID, spielfeld.getColor(new Pos(2,2)));
 		Assert.assertEquals(Colors.BLACK, spielfeld.getColor(new Pos(0,3)));
 		Assert.assertEquals(Colors.WHITE, spielfeld.getColor(new Pos(2,1)));
 	}
