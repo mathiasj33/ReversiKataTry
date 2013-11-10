@@ -8,11 +8,11 @@ public class SpielfeldFactory {
 	
 	private static Spielfeld sp;
 	
-	public static Spielfeld getSpielfeld3x3ForTestGetColorAndForToString() {
-		sp = new Spielfeld(3);
-		sp.setForInit(Colors.BLACK, new Pos(0,1));
-		sp.setForInit(Colors.VOID, new Pos(0,0));
-		sp.setForInit(Colors.WHITE, new Pos(0,2));
+	public static Spielfeld getSpielfeld2x2ForTestGetColorAndForToString() {
+		sp = new Spielfeld(2);
+		sp.setForInit(Colors.BLACK, new Pos(0,0));
+		sp.setForInit(Colors.VOID, new Pos(1,0));
+		sp.setForInit(Colors.WHITE, new Pos(1,1));
 		return sp;
 	}
 	

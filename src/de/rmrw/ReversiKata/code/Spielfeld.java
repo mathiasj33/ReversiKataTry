@@ -30,7 +30,7 @@ public class Spielfeld {
 	@Override
 	public String toString() {
 		String s = "";
-		SpielfeldIterator sI = new SpielfeldIterator(this);
+		SpielfeldIterator sI = createSpielfeldIterator();
 		while(sI.hasNext()) {
 			Pos p = sI.next();
 			s += getColor(p);
@@ -102,6 +102,10 @@ public class Spielfeld {
 
 	public Colors getColor(Pos pos) {
 		return map.get(pos);
+	}
+	
+	public SpielfeldIterator createSpielfeldIterator(){
+		return new SpielfeldIterator(this);
 	}
 
 }

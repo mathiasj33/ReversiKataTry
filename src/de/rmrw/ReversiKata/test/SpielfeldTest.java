@@ -18,20 +18,22 @@ public class SpielfeldTest {
 	
 	@Test 
 	public final void testGetColor() {
-		spielfeld = SpielfeldFactory.getSpielfeld3x3ForTestGetColorAndForToString();
-		Assert.assertEquals(Colors.BLACK, spielfeld.getColor(new Pos(0,1)));
-		Assert.assertEquals(Colors.VOID, spielfeld.getColor(new Pos(0,0)));
-		Assert.assertEquals(Colors.WHITE, spielfeld.getColor(new Pos(0,2)));
+		spielfeld = SpielfeldFactory.getSpielfeld2x2ForTestGetColorAndForToString();
+		Assert.assertEquals(Colors.BLACK, spielfeld.getColor(new Pos(0,0)));
+		Assert.assertEquals(Colors.VOID, spielfeld.getColor(new Pos(0,1)));
+		Assert.assertEquals(Colors.WHITE, spielfeld.getColor(new Pos(1,1)));
 	}
 	
 
 	@Test
 	public final void testToString() {
-		spielfeld = SpielfeldFactory.getSpielfeld3x3ForTestGetColorAndForToString();
-		String s = spielfeld.toString();
-		Assert.assertEquals("o b w"+System.getProperty("line.separator")+
-							"o o o"+System.getProperty("line.separator")+
-							"o o o"+System.getProperty("line.separator"),
+		// Partielles Mocking
+		Spielfeld spySpielfeld = spy(SpielfeldFactory.getSpielfeld2x2ForTestGetColorAndForToString());
+		doReturn(new SpielfeldIteratorStub(spySpielfeld)).when(spySpielfeld).createSpielfeldIterator();
+		// Mock-Ende;
+		String s = spySpielfeld.toString();
+		Assert.assertEquals("b o"+System.getProperty("line.separator")+
+							"o w"+System.getProperty("line.separator"),
 							s);
 	}
 	
