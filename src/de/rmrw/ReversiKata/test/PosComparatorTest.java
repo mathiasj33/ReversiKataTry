@@ -18,19 +18,33 @@ public class PosComparatorTest {
 	}
 	
 	@Test
-	public void testNegative() {
+	public void testNegativeX() {
 		p1 = new Pos(0,0);
 		p2 = new Pos(1,0);
 		Assert.assertEquals(-1, pC.compare(p1, p2));
 	}
 	
 	@Test
-	public void testPositive() {
+	public void testPositiveX() {
 		p1 = new Pos(2,1);
 		p2 = new Pos(1,3);
 		Assert.assertEquals(1, pC.compare(p1, p2));
 	}
+
+	@Test
+	public void testNegativeY() {
+		p1 = new Pos(0,0);
+		p2 = new Pos(0,1);
+		Assert.assertEquals(-1, pC.compare(p1, p2));
+	}
 	
+	@Test
+	public void testPositiveY() {
+		p1 = new Pos(2,3);
+		p2 = new Pos(2,1);
+		Assert.assertEquals(1, pC.compare(p1, p2));
+	}
+
 	@Test
 	public void testEqual() {
 		p1 = new Pos(2,1);

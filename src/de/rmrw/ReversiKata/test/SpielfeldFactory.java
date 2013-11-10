@@ -8,7 +8,7 @@ public class SpielfeldFactory {
 	
 	private static Spielfeld sp;
 	
-	public static Spielfeld getSpielfeldForTestGetColorAndForToString() {
+	public static Spielfeld getSpielfeld3x3ForTestGetColorAndForToString() {
 		sp = new Spielfeld(3);
 		sp.setForInit(Colors.BLACK, new Pos(0,1));
 		sp.setForInit(Colors.VOID, new Pos(0,0));
@@ -16,31 +16,39 @@ public class SpielfeldFactory {
 		return sp;
 	}
 	
-	public static Spielfeld getSpielfeldForWoKannSchwarz() {
-		// b  w  w
-		// o  o  o
-		//(b) o (b)
-		sp = new Spielfeld(3);
+	public static Spielfeld getSpielfeld2x2ForWoKannSchwarz() {
+		// b  w
+		// o  o
+		sp = new Spielfeld(2);
 		sp.setForInit(Colors.BLACK, new Pos(0,0));
-		sp.setForInit(Colors.WHITE, new Pos(1,0));
-		sp.setForInit(Colors.WHITE, new Pos(2,0));
+		sp.setForInit(Colors.WHITE, new Pos(0,1));
 		return sp;
 	}
 	
-	public static Spielfeld getSpielfeldForEsGibtEinenWegVonPosZufarbe() {
-		// b  w  w
-		// w  w  o
-		//(b) o (b)
+	public static Spielfeld getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal() {
 		sp = new Spielfeld(3);
-		sp.setForInit(Colors.BLACK, new Pos(0,0));
-		sp.setForInit(Colors.WHITE, new Pos(1,0));
-		sp.setForInit(Colors.WHITE, new Pos(2,0));
-		sp.setForInit(Colors.WHITE, new Pos(0,1));
+		sp.setForInit(Colors.BLACK, new Pos(1,0));
 		sp.setForInit(Colors.WHITE, new Pos(1,1));
 		return sp;
 	}
-	
-	public static Spielfeld getSpielfeldForContains() {
+
+	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeVertikal() {
+		sp = new Spielfeld(4);
+		sp.setForInit(Colors.BLACK, new Pos(3,3));
+		sp.setForInit(Colors.WHITE, new Pos(3,2));
+		sp.setForInit(Colors.WHITE, new Pos(3,1));
+		return sp;
+	}
+
+	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeDiagonal() {
+		sp = new Spielfeld(4);
+		sp.setForInit(Colors.BLACK, new Pos(3,0));
+		sp.setForInit(Colors.WHITE, new Pos(2,1));
+		sp.setForInit(Colors.WHITE, new Pos(1,2));
+		return sp;
+	}
+
+	public static Spielfeld getSpielfeld2x2ForContains() {
 		sp = new Spielfeld(2);
 		return sp;
 	}
