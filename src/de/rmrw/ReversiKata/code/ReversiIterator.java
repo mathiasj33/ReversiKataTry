@@ -28,5 +28,13 @@ public abstract class ReversiIterator implements Iterator<Pos> {
 	public void remove() {
 		throw new RuntimeException("wird nicht benotigt und ist deshalb nicht implementiert.");
 	}
+	
+	public int getCurrentNumber() {
+		return currentNumber;
+	}
+	
+	public Pos getCurrentPosition() {
+		return positions.get(currentNumber);
+	}
 
 }

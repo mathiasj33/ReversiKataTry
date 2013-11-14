@@ -87,9 +87,9 @@ public class SpielfeldTest {
 	}
 
 	@Test
-	public void testEsGibtEinenWegVonPosZuFarbeHorizontal() {
+	public void testEsGibtEinenWegVonPosZuFarbeHorizontal() {  //TODO: Stub, grün
 		spielfeld = SpielfeldFactory.getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal();
-		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,2), Colors.BLACK));
+		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(0,0), Colors.BLACK));
 		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,1), Colors.BLACK));
 	}
 

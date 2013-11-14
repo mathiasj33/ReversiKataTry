@@ -8,7 +8,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({ 
 	SpielfeldTest.class, 
 	ColorsTest.class, 
-	NeighbourIteratorTest.class, 
 	SpielfeldIteratorTest.class, 
 	LineIteratorTest.class, 
 	PosTest.class,
