@@ -49,5 +49,18 @@ public class NeighbourIteratorTest {
 		Assert.assertTrue(resultSet.contains(new Pos(2,2)));
 		Assert.assertTrue(resultSet.contains(new Pos(3,2)));
 	}
+	
+	@Test
+	public void testNotAllAdded() {
+		Set<Pos> resultSet = new HashSet<Pos>();
+		NeighbourIterator nit = new NeighbourIterator(spielfeld, new Pos(0,0));
+		while(nit.hasNext()) {
+			resultSet.add(nit.next());
+		}
+		Assert.assertEquals(3, resultSet.size());
+		Assert.assertTrue(resultSet.contains(new Pos(1,0)));
+		Assert.assertTrue(resultSet.contains(new Pos(1,1)));
+		Assert.assertTrue(resultSet.contains(new Pos(0,1)));
+	}
 
 }

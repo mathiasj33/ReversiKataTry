@@ -46,18 +46,13 @@ public class Spielfeld {
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
 		
-		NeighbourIterator nI = new NeighbourIterator(this,pos);
+		Pos[] directions = new Pos[] {
+				new Pos(0, 1),new Pos(0,-1),new Pos(1, 0),new Pos(- 1, 0),new Pos(1, 1),new Pos(1,- 1),new Pos( - 1, 1),new Pos(- 1, - 1)
+			};
 		
-		while(nI.hasNext()) {
-			Pos nP;
-			if(nI.getCurrentNumber() == 0) {
-				nP = nI.getCurrentPosition();  //Erste Pos nicht überspringen
-				nI.next();
-			}
-			else {
-				nP = nI.next();
-			}
-			LineIterator lI = createLineIterator(pos, nP);
+		for(int i = 0; i < directions.length; i++) {
+			Pos p = directions[i];
+			LineIterator lI = createLineIterator(pos, p);
 			lI.next(); // Start-Position überspringen 
 
 			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben

@@ -27,11 +27,22 @@ public class SpielfeldFactory {
 	
 	public static Spielfeld getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal() {
 		//o  o  o
-		//o  w  o
-		//b  o  o
+		//o  w  b
+		//o  o  o
 		sp = new Spielfeld(3);
-		sp.setForInit(Colors.BLACK, new Pos(2,0));
+		sp.setForInit(Colors.BLACK, new Pos(1,1));
+		sp.setForInit(Colors.WHITE, new Pos(1,2));
+		return sp;
+	}
+	
+	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeHorizontal2() {
+		//o  o  o  o
+		//o  w  b  o
+		//o  o  o  o
+		//o  o  o  o
+		sp = new Spielfeld(4);
 		sp.setForInit(Colors.WHITE, new Pos(1,1));
+		sp.setForInit(Colors.BLACK, new Pos(1,2));
 		return sp;
 	}
 
