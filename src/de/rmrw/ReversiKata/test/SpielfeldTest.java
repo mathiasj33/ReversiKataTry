@@ -87,17 +87,11 @@ public class SpielfeldTest {
 	}
 
 	@Test
-	public void testEsGibtEinenWegVonPosZuFarbeHorizontal() {  //TODO: Stub, grün
-		spielfeld = SpielfeldFactory.getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal();
-		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0), Colors.BLACK));
-		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,1), Colors.BLACK));
-	}
-	
-	@Test
-	public void testEsGibtEinenWegVonPosZuFarbeHorizontal2() {
-		spielfeld = SpielfeldFactory.getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeHorizontal2();
-		Assert.assertTrue(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0), Colors.BLACK));
-		Assert.assertFalse(spielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,1), Colors.BLACK));
+	public void testEsGibtEinenWegVonPosZuFarbeHorizontal() {  //TODO: Stub
+		Spielfeld spySpielfeld = spy(SpielfeldFactory.getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal());
+		doReturn(new LineIteratorStub(spySpielfeld,new Pos(1,0), new Pos(0,1))).when(spySpielfeld.createLineIterator(new Pos(1,0), new Pos(0,1)));
+		Assert.assertTrue(spySpielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0), Colors.BLACK));
+		Assert.assertFalse(spySpielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,1), Colors.BLACK));
 	}
 
 	@Test

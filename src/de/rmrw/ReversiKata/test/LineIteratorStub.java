@@ -14,9 +14,16 @@ public class LineIteratorStub extends LineIterator {
 	public LineIteratorStub(Spielfeld spielfeld, Pos startPos, Pos dirPos) {
 		super(spielfeld, startPos, dirPos);
 		ar = new ArrayList<Pos>();
-		ar.add(new Pos(0,0));
-		ar.add(new Pos(0,1));
-		ar.add(new Pos(0,2));
+		if(dirPos.equals(new Pos(0,1))) {  //Für den Horizontalen Test
+			ar.add(new Pos(0,0));
+			ar.add(new Pos(0,1));
+			ar.add(new Pos(0,2));
+		}
+		else if(dirPos.equals(new Pos(1,0))) { //bei vertikaler Richtung
+			
+		}
+		
+		
 		it = ar.iterator();
 	}
 

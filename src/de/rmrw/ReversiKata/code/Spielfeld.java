@@ -46,12 +46,10 @@ public class Spielfeld {
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
 		
-		Pos[] directions = new Pos[] {
-				new Pos(0, 1),new Pos(0,-1),new Pos(1, 0),new Pos(- 1, 0),new Pos(1, 1),new Pos(1,- 1),new Pos( - 1, 1),new Pos(- 1, - 1)
-			};
+		DirectionIterator dit = new DirectionIterator();
 		
-		for(int i = 0; i < directions.length; i++) {
-			Pos p = directions[i];
+		while(dit.hasNext()) {
+			Pos p = dit.next();
 			LineIterator lI = createLineIterator(pos, p);
 			lI.next(); // Start-Position überspringen 
 

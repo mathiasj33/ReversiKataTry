@@ -30,17 +30,6 @@ public class SpielfeldFactory {
 		//o  w  b
 		//o  o  o
 		sp = new Spielfeld(3);
-		sp.setForInit(Colors.BLACK, new Pos(1,1));
-		sp.setForInit(Colors.WHITE, new Pos(1,2));
-		return sp;
-	}
-	
-	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeHorizontal2() {
-		//o  o  o  o
-		//o  w  b  o
-		//o  o  o  o
-		//o  o  o  o
-		sp = new Spielfeld(4);
 		sp.setForInit(Colors.WHITE, new Pos(1,1));
 		sp.setForInit(Colors.BLACK, new Pos(1,2));
 		return sp;
