@@ -9,6 +9,8 @@ public class SpielfeldFactory {
 	private static Spielfeld sp;
 	
 	public static Spielfeld getSpielfeld2x2ForTestGetColorAndForToString() {
+		// b  o
+		// o  w
 		sp = new Spielfeld(2);
 		sp.setForInit(Colors.BLACK, new Pos(0,0));
 		sp.setForInit(Colors.VOID, new Pos(1,0));
@@ -36,14 +38,22 @@ public class SpielfeldFactory {
 	}
 
 	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeVertikal() {
+		//b  o  o  o
+		//w  o  o  o
+		//w  o  o  o
+		//o  o  o  o
 		sp = new Spielfeld(4);
-		sp.setForInit(Colors.BLACK, new Pos(3,3));
-		sp.setForInit(Colors.WHITE, new Pos(3,2));
-		sp.setForInit(Colors.WHITE, new Pos(3,1));
+		sp.setForInit(Colors.BLACK, new Pos(0,0));
+		sp.setForInit(Colors.WHITE, new Pos(1,0));
+		sp.setForInit(Colors.WHITE, new Pos(2,0));
 		return sp;
 	}
 
 	public static Spielfeld getSpielfeld4x4ForEsGibtEinenWegVonPosZuFarbeDiagonal() {
+		//o  o  o  o
+		//o  o  w  o
+		//o  w  o  o
+		//b  o  o  o
 		sp = new Spielfeld(4);
 		sp.setForInit(Colors.BLACK, new Pos(3,0));
 		sp.setForInit(Colors.WHITE, new Pos(2,1));
