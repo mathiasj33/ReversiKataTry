@@ -88,9 +88,14 @@ public class SpielfeldTest {
 
 	@Test
 	public void testEsGibtEinenWegVonPosZuFarbeHorizontal() {  
+		// partielles Mocking - DirectionIterator und LineIterator werden gemockt
 		Spielfeld spySpielfeld = spy(SpielfeldFactory.getSpielfeld3x3ForEsGibtEinenWegVonPosZuFarbeHorizontal());
-		doReturn(new LineIteratorStub(spySpielfeld,new Pos(1,0), new Pos(0,1))).when(spySpielfeld).createLineIterator(new Pos(1,0), new Pos(0,1));
-		Assert.assertTrue(spySpielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,0), Colors.BLACK));
+		doReturn(new DirectionIteratorStubReturns0_1and1_1()).when(spySpielfeld).createDirectionIterator();
+		doReturn(new LineIteratorStub3x3Directions0_1and1_1(spySpielfeld,new Pos(0,0), new Pos(0,1))).when(spySpielfeld).createLineIterator(new Pos(0,0), new Pos(0,1));
+		doReturn(new LineIteratorStub3x3Directions0_1and1_1(spySpielfeld,new Pos(0,0), new Pos(1,1))).when(spySpielfeld).createLineIterator(new Pos(0,0), new Pos(1,1));
+		// Mocking-Ende
+		
+		Assert.assertTrue(spySpielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(0,0), Colors.BLACK));
 		Assert.assertFalse(spySpielfeld.esGibtEinenWegVonPosZuFarbe(new Pos(1,1), Colors.BLACK));
 	}
 

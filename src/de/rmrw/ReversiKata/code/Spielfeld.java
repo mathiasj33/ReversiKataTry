@@ -21,7 +21,7 @@ public class Spielfeld {
 	}
 	
 	public void setForInit(Colors c, Pos p) {
-		if(size <= p.getX() || size <= p.getY()) {
+		if(size <= p.getZeile() || size <= p.getSpalte()) {
 			throw new RuntimeException("Position ausserhalb des Spielfelds");
 		}
 		map.put(p, c);
@@ -34,7 +34,7 @@ public class Spielfeld {
 		while(sI.hasNext()) {
 			Pos p = sI.next();
 			s += getColor(p);
-			if(p.getY() == size - 1) { //Wenn es das letzte Element in der Zeile ist
+			if(p.getSpalte() == size - 1) { //Wenn es das letzte Element in der Zeile ist
 				s += System.getProperty("line.separator");
 			}
 			else {
@@ -46,7 +46,7 @@ public class Spielfeld {
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
 		
-		DirectionIterator dit = new DirectionIterator();
+		DirectionIterator dit = createDirectionIterator();
 		
 		while(dit.hasNext()) {
 			Pos p = dit.next();
@@ -109,6 +109,10 @@ public class Spielfeld {
 	
 	public LineIterator createLineIterator(Pos p, Pos dirPos) {
 		return new LineIterator(this, p, dirPos);
+	}
+
+	public DirectionIterator createDirectionIterator() {
+		return new DirectionIterator();
 	}
 
 }

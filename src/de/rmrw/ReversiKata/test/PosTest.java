@@ -12,8 +12,8 @@ public class PosTest {
 		Pos pos1 = new Pos(1,1);
 		Pos pos2 = new Pos(4,3);
 		Pos pos3 = pos1.add(pos2);
-		Assert.assertEquals(5,pos3.getX());
-		Assert.assertEquals(-2, pos3.getY());
+		Assert.assertEquals(5,pos3.getZeile());
+		Assert.assertEquals(4, pos3.getSpalte());
 	}
 
 }

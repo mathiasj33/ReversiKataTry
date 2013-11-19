@@ -2,12 +2,12 @@ package de.rmrw.ReversiKata.code;
 
 public class Pos {
 	
-	private int x;
-	private int y;
+	private int zeile;
+	private int spalte;
 	
-	public Pos(int x, int y) {
-		this.setX(x);
-		this.setY(y);
+	public Pos(int zeile, int spalte) {
+		this.setZeile(zeile);
+		this.setSpalte(spalte);
 	}
 
 
@@ -16,8 +16,8 @@ public class Pos {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + x;
-		result = prime * result + y;
+		result = prime * result + zeile;
+		result = prime * result + spalte;
 		return result;
 	}
 
@@ -32,37 +32,37 @@ public class Pos {
 		if (getClass() != obj.getClass())
 			return false;
 		Pos other = (Pos) obj;
-		if (x != other.x)
+		if (zeile != other.zeile)
 			return false;
-		if (y != other.y)
+		if (spalte != other.spalte)
 			return false;
 		return true;
 	}
 
 
 
-	public int getX() {
-		return x;
+	public int getZeile() {
+		return zeile;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setZeile(int x) {
+		this.zeile = x;
 	}
 
-	public int getY() {
-		return y;
+	public int getSpalte() {
+		return spalte;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setSpalte(int y) {
+		this.spalte = y;
 	}
 	
 	public String toString() {
-		return new String("X: " + x + " Y: " + y);
+		return new String("Zeile: " + zeile + " Spalte: " + spalte);
 	}
 	
 	public Pos add(Pos pos2) {
-		return new Pos(x + pos2.getX(), y - pos2.getY());
+		return new Pos(zeile + pos2.getZeile(), spalte + pos2.getSpalte());
 	}
 
 }
