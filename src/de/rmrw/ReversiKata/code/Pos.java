@@ -1,6 +1,6 @@
 package de.rmrw.ReversiKata.code;
 
-public class Pos {
+public class Pos implements Comparable<Pos> {
 	
 	private int zeile;
 	private int spalte;
@@ -63,6 +63,20 @@ public class Pos {
 	
 	public Pos add(Pos pos2) {
 		return new Pos(zeile + pos2.getZeile(), spalte + pos2.getSpalte());
+	}
+	
+	public int compareTo(Pos pos2) {
+		if (this.getZeile() < pos2.getZeile()) 
+			return -1;
+		if (this.getZeile() > pos2.getZeile())
+			return 1;
+		// Ab hier gilt x1==x2
+		if (this.getSpalte() < pos2.getSpalte()) 
+			return -1;
+		if (this.getSpalte() > pos2.getSpalte())
+			return 1;
+		// Ab hier gilt x1==x2 && y1==y2
+		return 0;
 	}
 
 }

@@ -1,15 +1,13 @@
 package de.rmrw.ReversiKata.code;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Spielfeld {
 	
 	private int size;
-	private HashMap<Pos,Colors> map = new HashMap<Pos,Colors>();
+	private TreeMap<Pos,Colors> map = new TreeMap<Pos,Colors>();
 	
 	public Spielfeld(int s) {
 		size = s;
@@ -89,15 +87,6 @@ public class Spielfeld {
 		if(map.containsKey(p)) return true;
 		return false;
 	}
-	
-	public ArrayList<Pos> getAllPositionsSorted() {
-		ArrayList<Pos> sortedList = new ArrayList<Pos>();
-		for(Pos p : map.keySet()) {
-			sortedList.add(p);
-		}
-		Collections.sort(sortedList, new PosComparator());
-		return sortedList;
-	}
 
 	public Colors getColor(Pos pos) {
 		return map.get(pos);
@@ -113,6 +102,10 @@ public class Spielfeld {
 
 	public DirectionIterator createDirectionIterator() {
 		return new DirectionIterator();
+	}
+	
+	public TreeMap<Pos, Colors> getTreeMap() {
+		return map;
 	}
 
 }
