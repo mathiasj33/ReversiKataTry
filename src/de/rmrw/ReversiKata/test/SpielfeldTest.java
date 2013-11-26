@@ -221,11 +221,11 @@ public class SpielfeldTest {
 		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein();
 		// o  w  b  o 
 		// o  o  b  b
-		// o  w  o  b
+		// o  o  o  b
 		// o  o  o  w
 		spielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,3));
-		Assert.assertEquals(8, spielfeld.anzahl(Colors.WHITE));
-		Assert.assertEquals(0, spielfeld.anzahl(Colors.BLACK));
+		Assert.assertEquals(6, spielfeld.anzahl(Colors.WHITE));
+		Assert.assertEquals(1, spielfeld.anzahl(Colors.BLACK));
 	}
 
 }

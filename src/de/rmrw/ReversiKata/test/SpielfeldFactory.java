@@ -99,13 +99,12 @@ public class SpielfeldFactory {
 		sp = new Spielfeld(4);
 		// o  w  b  o 
 		// o  o  b  b
-		// o  w  o  b
+		// o  o  o  b
 		// o  o  o  w
 		sp.setForInit(Colors.WHITE, new Pos(0,1));
 		sp.setForInit(Colors.BLACK, new Pos(0,2));
 		sp.setForInit(Colors.BLACK, new Pos(1,2));
 		sp.setForInit(Colors.BLACK, new Pos(1,3));
-		sp.setForInit(Colors.WHITE, new Pos(2,1));
 		sp.setForInit(Colors.BLACK, new Pos(2,3));
 		sp.setForInit(Colors.WHITE, new Pos(3,3));
 		return sp;
