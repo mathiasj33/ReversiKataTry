@@ -107,5 +107,34 @@ public class Spielfeld {
 	public TreeMap<Pos, Colors> getTreeMap() {
 		return map;
 	}
+	
+	public void setzeSpielstein(Colors color, Pos p) {
+		if(woKann(color).contains(p)) {
+			setForInit(color, p);
+				DirectionIterator dI = new DirectionIterator();
+				while(dI.hasNext()) {
+					LineIterator lI = new LineIterator(this, p, dI.next());
+					lI.next(); //startPos überspringen
+					while(lI.hasNext()) {
+						Pos nextPos = lI.next();
+						if(map.get(nextPos) != color) {
+							map.put(nextPos, color);
+						}
+						else {
+							break;
+						}
+						}
+					}
+				
+			}
+	}
+	
+	public int anzahl(Colors color) {
+		int i = 0;
+		for(Colors c : map.values()) {
+			if(c == color) i++;
+		}
+		return i;
+	}
 
 }
