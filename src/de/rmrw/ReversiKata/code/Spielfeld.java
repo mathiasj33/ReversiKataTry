@@ -113,15 +113,20 @@ public class Spielfeld {
 			setForInit(color, p);
 				DirectionIterator dI = new DirectionIterator();
 				while(dI.hasNext()) {
-					LineIterator lI = new LineIterator(this, p, dI.next());
+					Pos dirPos = dI.next();
+					LineIterator lI = new LineIterator(this, p, dirPos);
 					lI.next(); //startPos überspringen
 					while(lI.hasNext()) {
-						Pos nextPos = lI.next();
-						if(map.get(nextPos) != color) {
-							map.put(nextPos, color);
-						}
-						else {
-							break;
+						if(map.get(lI.next()) == color) {  //Wenn es irgendwann wieder dieselbe Farbe gibt
+							LineIterator lI2 = new LineIterator(this, p, dirPos);
+							lI2.next(); //startPos überspringen
+							while(lI2.hasNext()) {
+								Pos nextPos = lI2.next();
+								if(map.get(nextPos) == color) {
+									break;
+								}
+								map.put(nextPos, color);
+							}
 						}
 						}
 					}
