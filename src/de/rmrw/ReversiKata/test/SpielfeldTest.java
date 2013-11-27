@@ -216,9 +216,9 @@ public class SpielfeldTest {
 	}
 	
 	@Test
-	public void testSetzeSpielstein()
+	public void testSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen()
 	{
-		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein();
+		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen();
 		// o  w  b  o 
 		// o  o  b  b
 		// o  o  o  b
@@ -228,4 +228,24 @@ public class SpielfeldTest {
 		Assert.assertEquals(1, spielfeld.anzahl(Colors.BLACK));
 	}
 
+	@Test
+	public void testSetzeSpielstein_Nur1HorizDrehen()
+	{
+		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein_Nur1HorizDrehen();
+//		 b b b b
+//		 o b w b
+//		 o w b b
+//		 w w w b
+		System.out.println("Vor setzeSpielstein:");
+		System.out.println(spielfeld);
+		
+		spielfeld.setzeSpielstein(Colors.WHITE,new Pos(1,0));
+		
+		System.out.println("Nach setzeSpielstein:");
+		System.out.println(spielfeld);
+		
+		Assert.assertEquals(15, spielfeld.anzahl(Colors.WHITE)+spielfeld.anzahl(Colors.BLACK));
+	}
+
+	
 }
