@@ -218,33 +218,83 @@ public class SpielfeldTest {
 	@Test
 	public void testSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen()
 	{
-		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen();
+		Spielfeld spySpielfeld = spy(SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen());
 		// o  w  b  o 
 		// o  o  b  b
 		// o  o  o  b
 		// o  o  o  w
-		spielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,3));
-		Assert.assertEquals(6, spielfeld.anzahl(Colors.WHITE));
-		Assert.assertEquals(1, spielfeld.anzahl(Colors.BLACK));
+		
+		// mock Iteratoren
+		DirectionIterator mockDI = mock(DirectionIterator.class);
+		when(mockDI.hasNext()).thenReturn( true, true, true, false);
+		when(mockDI.next()).thenReturn( new Pos(0,-1), new Pos(1,-1),new Pos(1,0)); // horiz. links, diagonal ro->lu, vert. unten
+		
+		LineIterator mockLIHorizontal = mock(LineIterator.class);
+		when(mockLIHorizontal.hasNext()).thenReturn( true, true, true, true, false);
+		when(mockLIHorizontal.next()).thenReturn( new Pos(0,3), new Pos(0,2), new Pos(0,1), new Pos(0,0));
+		
+		LineIterator mockLIDiagonal = mock(LineIterator.class);
+		when(mockLIDiagonal.hasNext()).thenReturn( true, true, true, true, false);
+		when(mockLIDiagonal.next()).thenReturn( new Pos(0,3), new Pos(1,2), new Pos(2,1), new Pos(3,0));
+		
+		LineIterator mockLIVertikal = mock(LineIterator.class);
+		when(mockLIVertikal.hasNext()).thenReturn( true, true, true, true, false);
+		when(mockLIVertikal.next()).thenReturn( new Pos(0,3), new Pos(1,3), new Pos(2,3), new Pos(3,3));
+		// mocking - Iteratoren vollständig-Ende
+		
+		// stub Iteratoren-Erzeugung
+		doReturn(mockDI).when(spySpielfeld).createDirectionIterator();
+		doReturn(mockLIHorizontal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(0,-1));
+		doReturn(mockLIDiagonal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,-1));
+		doReturn(mockLIVertikal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,0));
+		// Ende stub Iteratoren-Erzeugung
+		
+		spySpielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,3));
+		Assert.assertEquals(6, spySpielfeld.anzahl(Colors.WHITE));
+		Assert.assertEquals(1, spySpielfeld.anzahl(Colors.BLACK));
 	}
 
 	@Test
 	public void testSetzeSpielstein_Nur1HorizDrehen()
 	{
-		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld4x4ForSetzeSpielstein_Nur1HorizDrehen();
-//		 b b b b
-//		 o b w b
-//		 o w b b
-//		 w w w b
-		System.out.println("Vor setzeSpielstein:");
-		System.out.println(spielfeld);
+		Spielfeld spySpielfeld = spy(SpielfeldFactory.getSpielfeld3x3ForSetzeSpielstein_Nur1HorizDrehen());
+//		 o b w
+//		 o o o
+//		 w o o
+		// mock Iteratoren
+		DirectionIterator mockDI = mock(DirectionIterator.class);
+		when(mockDI.hasNext()).thenReturn( true, true, true, false);
+		when(mockDI.next()).thenReturn( new Pos(0,1), new Pos(1,1),new Pos(1,0)); // horiz. rechts, diagonal lo->ru, vert. unten
 		
-		spielfeld.setzeSpielstein(Colors.WHITE,new Pos(1,0));
+		LineIterator mockLIHorizontal = mock(LineIterator.class);
+		when(mockLIHorizontal.hasNext()).thenReturn( true, true, true, false);
+		when(mockLIHorizontal.next()).thenReturn( new Pos(0,0), new Pos(0,1), new Pos(0,2));
+		
+		LineIterator mockLIDiagonal = mock(LineIterator.class);
+		when(mockLIDiagonal.hasNext()).thenReturn( true, true, true, false);
+		when(mockLIDiagonal.next()).thenReturn( new Pos(0,0), new Pos(1,1), new Pos(2,2));
+		
+		LineIterator mockLIVertikal = mock(LineIterator.class);
+		when(mockLIVertikal.hasNext()).thenReturn( true, true, true, false);
+		when(mockLIVertikal.next()).thenReturn( new Pos(0,0), new Pos(1,0), new Pos(2,0));
+		// mocking - Iteratoren vollständig-Ende
+
+		// stub Iteratoren-Erzeugung
+		doReturn(mockDI).when(spySpielfeld).createDirectionIterator();
+		doReturn(mockLIHorizontal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(0,-1));
+		doReturn(mockLIDiagonal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,-1));
+		doReturn(mockLIVertikal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,0));
+		// Ende stub Iteratoren-Erzeugung
+	
+		System.out.println("Vor setzeSpielstein:");
+		System.out.println(spySpielfeld);
+		
+		spySpielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,0));
 		
 		System.out.println("Nach setzeSpielstein:");
-		System.out.println(spielfeld);
+		System.out.println(spySpielfeld);
 		
-		Assert.assertEquals(15, spielfeld.anzahl(Colors.WHITE)+spielfeld.anzahl(Colors.BLACK));
+		Assert.assertEquals(Colors.VOID, spySpielfeld.getColor(new Pos(1,0)));
 	}
 
 	

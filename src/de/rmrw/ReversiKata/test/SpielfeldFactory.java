@@ -110,17 +110,14 @@ public class SpielfeldFactory {
 		return sp;
 	}
 
-	public static Spielfeld getSpielfeld4x4ForSetzeSpielstein_Nur1HorizDrehen() {
-		sp = new Spielfeld(4);
-//		 b b b b
-//		 o b w b
-//		 o w b b
-//		 w w w b
-		for (int i=0; i<4; i++) sp.setForInit(Colors.BLACK, new Pos(i,i));
-		for (int i=1; i<4; i++) sp.setForInit(Colors.BLACK, new Pos(0,i));
-		for (int i=1; i<4; i++) sp.setForInit(Colors.BLACK, new Pos(i,3));
-		for (int i=0; i<3; i++) sp.setForInit(Colors.WHITE, new Pos(3,i));
-		for (int i=1; i<3; i++) sp.setForInit(Colors.WHITE, new Pos(3-i,i));
+	public static Spielfeld getSpielfeld3x3ForSetzeSpielstein_Nur1HorizDrehen() {
+		sp = new Spielfeld(3);
+//		 o b w
+//		 o o o
+//		 w o o
+		sp.setForInit(Colors.BLACK, new Pos(0,1));
+		sp.setForInit(Colors.WHITE, new Pos(0,2));
+		sp.setForInit(Colors.WHITE, new Pos(2,0));
 		return sp;
 	}
 
