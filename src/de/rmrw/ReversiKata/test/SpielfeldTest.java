@@ -1,7 +1,11 @@
 package de.rmrw.ReversiKata.test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -224,6 +228,7 @@ public class SpielfeldTest {
 		// o  o  o  b
 		// o  o  o  w
 		spielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,3));
+		System.out.println("sp\n" + spielfeld);
 		Assert.assertEquals(6, spielfeld.anzahl(Colors.WHITE));
 		Assert.assertEquals(1, spielfeld.anzahl(Colors.BLACK));
 	}

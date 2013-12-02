@@ -1,5 +1,6 @@
 package de.rmrw.ReversiKata.code;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
@@ -43,31 +44,43 @@ public class Spielfeld {
 	}
 
 	public boolean esGibtEinenWegVonPosZuFarbe(Pos pos, Colors color) {
-		
+		if(berechneUndPruefeWeg(pos, color).size() > 0) return true;
+		return false;
+	}
+	
+	public ArrayList<Pos> berechneUndPruefeWeg(Pos startPos, Colors c) {
+		ArrayList<Pos> mainList = new ArrayList<Pos>();
 		DirectionIterator dit = createDirectionIterator();
 		
 		while(dit.hasNext()) {
+			ArrayList<Pos> aL = new ArrayList<Pos>();
 			Pos p = dit.next();
-			LineIterator lI = createLineIterator(pos, p);
+			LineIterator lI = createLineIterator(startPos, p);
 			lI.next(); // Start-Position überspringen 
 
 			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben
 			if (!lI.hasNext()) continue;
 			Pos neighbourPos = lI.next(); 
-			if (getColor(neighbourPos)==Colors.VOID || getColor(neighbourPos) == color)
+			if (getColor(neighbourPos)==Colors.VOID || getColor(neighbourPos) == c)
 				continue;
-			
+			aL.add(neighbourPos);
 			// Unsere Startposition hat jetzt also einen Nachbarn in der anderen Farbe.
 			// Auf dem weiteren Weg müssen wir jetzt wieder einen in der gleichen Farbe finden:
 			while (lI.hasNext()) {
 				Pos nextPosInLine = lI.next();
-				if (getColor(nextPosInLine)==Colors.VOID)
+				aL.add(nextPosInLine);
+				if (getColor(nextPosInLine)==Colors.VOID) {
 					break; // Lücke
-				if (getColor(nextPosInLine).equals(color))
-					return true;
+				}
+				if (getColor(nextPosInLine).equals(c))
+					aL.remove(aL.size() - 1);  //Dann darf der letzte Stein nicht umgedreht werden
+					for(Pos pos : aL) {
+						mainList.add(pos);
+					}
+					break;
 			}
 		}
-		return false;
+		return mainList;
 	}
 
 	
@@ -111,27 +124,11 @@ public class Spielfeld {
 	public void setzeSpielstein(Colors color, Pos p) {
 		if(woKann(color).contains(p)) {
 			setForInit(color, p);
-				DirectionIterator dI = new DirectionIterator();
-				while(dI.hasNext()) {
-					Pos dirPos = dI.next();
-					LineIterator lI = new LineIterator(this, p, dirPos);
-					lI.next(); //startPos überspringen
-					while(lI.hasNext()) {
-						if(map.get(lI.next()) == color) {  //Wenn es irgendwann wieder dieselbe Farbe gibt
-							LineIterator lI2 = new LineIterator(this, p, dirPos);
-							lI2.next(); //startPos überspringen
-							while(lI2.hasNext()) {
-								Pos nextPos = lI2.next();
-								if(map.get(nextPos) == color) {
-									break;
-								}
-								map.put(nextPos, color);
-							}
-						}
-						}
-					}
-				
+			ArrayList<Pos> positions = berechneUndPruefeWeg(p, color);
+			for(Pos pos : positions) {
+				map.put(pos, color);
 			}
+		}
 	}
 	
 	public int anzahl(Colors color) {
