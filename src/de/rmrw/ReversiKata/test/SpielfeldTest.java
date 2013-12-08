@@ -1,7 +1,11 @@
 package de.rmrw.ReversiKata.test;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.junit.Assert;
@@ -214,7 +218,7 @@ public class SpielfeldTest {
 		doReturn(mockLIDiagonal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,-1));
 		// mocking - Spielfeld partiell/Teil 2-Ende
 	}
-/*	
+	
 	@Test
 	public void testSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen()
 	{
@@ -227,7 +231,7 @@ public class SpielfeldTest {
 		Assert.assertEquals(6, spielfeld.anzahl(Colors.WHITE));
 		Assert.assertEquals(1, spielfeld.anzahl(Colors.BLACK));
 	}
-*/
+/*
 	
 	@Test
 	public void testSetzeSpielstein_1HorizDrehen_2VertDrehen_0DiagDrehen()
@@ -267,7 +271,7 @@ public class SpielfeldTest {
 		Assert.assertEquals(6, spySpielfeld.anzahl(Colors.WHITE));
 		Assert.assertEquals(1, spySpielfeld.anzahl(Colors.BLACK));
 	}
-
+*/
 	@Test
 	public void testSetzeSpielstein_Nur1HorizDrehen()
 	{
@@ -299,16 +303,30 @@ public class SpielfeldTest {
 		doReturn(mockLIDiagonal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,-1));
 		doReturn(mockLIVertikal).when(spySpielfeld).createLineIterator(new Pos(0,3), new Pos(1,0));
 		// Ende stub Iteratoren-Erzeugung
-	
-		System.out.println("Vor setzeSpielstein:");
-		System.out.println(spySpielfeld);
 		
 		spySpielfeld.setzeSpielstein(Colors.WHITE,new Pos(0,0));
 		
-		System.out.println("Nach setzeSpielstein:");
-		System.out.println(spySpielfeld);
-		
 		Assert.assertEquals(Colors.VOID, spySpielfeld.getColor(new Pos(1,0)));
+	}
+
+	
+	
+	@Test
+	public void testSetzeSpielstein_3HorizDrehen()
+	{
+		Spielfeld spielfeld = SpielfeldFactory.getSpielfeld5x5ForSetzeSpielstein_3HorizDrehen();
+//		o w w w b
+//		o o o o o
+//		o o o o o
+//		o o o o o
+//		o o o o o
+		System.out.println("Vor setzeSpielstein:");
+		System.out.println(spielfeld);
+		spielfeld.setzeSpielstein(Colors.BLACK, new Pos(0,0));
+		System.out.println("Nach setzeSpielstein:");
+		System.out.println(spielfeld);
+		Assert.assertEquals(5, spielfeld.anzahl(Colors.BLACK));
+		Assert.assertEquals(0, spielfeld.anzahl(Colors.WHITE));
 	}
 
 	

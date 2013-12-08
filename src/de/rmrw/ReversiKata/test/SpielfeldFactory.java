@@ -120,6 +120,19 @@ public class SpielfeldFactory {
 		sp.setForInit(Colors.WHITE, new Pos(2,0));
 		return sp;
 	}
+	
+	public static Spielfeld getSpielfeld5x5ForSetzeSpielstein_3HorizDrehen() {
+//		o w w w b
+//		o o o o o
+//		o o o o o
+//		o o o o o
+//		o o o o o
+		sp = new Spielfeld(5);
+		for (int i=1; i<4; i++) 
+			sp.setForInit(Colors.WHITE, new Pos(0,i));
+		sp.setForInit(Colors.BLACK, new Pos(0,4));
+		return sp;
+	}
 
 
 }
