@@ -50,7 +50,7 @@ public class Spielfeld {
 	
 	public ArrayList<Pos> berechneUndPruefeWeg(Pos startPos, Colors c) {
 		ArrayList<Pos> mainList = new ArrayList<Pos>();
-		DirectionIterator dit = createDirectionIterator();
+		DirectionIterator dit = createDirectionIterator(startPos, this);
 		
 		while(dit.hasNext()) {
 			ArrayList<Pos> aL = new ArrayList<Pos>();
@@ -68,16 +68,18 @@ public class Spielfeld {
 			// Auf dem weiteren Weg müssen wir jetzt wieder einen in der gleichen Farbe finden:
 			while (lI.hasNext()) {
 				Pos nextPosInLine = lI.next();
-				aL.add(nextPosInLine);
 				if (getColor(nextPosInLine)==Colors.VOID) {
 					break; // Lücke
 				}
-				if (getColor(nextPosInLine).equals(c))
-					aL.remove(aL.size() - 1);  //Dann darf der letzte Stein nicht umgedreht werden
+				else if (getColor(nextPosInLine).equals(c)) {
 					for(Pos pos : aL) {
 						mainList.add(pos);
 					}
 					break;
+				}
+				else {
+					aL.add(nextPosInLine);
+				}
 			}
 		}
 		return mainList;
@@ -113,8 +115,8 @@ public class Spielfeld {
 		return new LineIterator(this, p, dirPos);
 	}
 
-	public DirectionIterator createDirectionIterator() {
-		return new DirectionIterator();
+	public DirectionIterator createDirectionIterator(Pos p, Spielfeld s) {
+		return new DirectionIterator(p, s);
 	}
 	
 	public TreeMap<Pos, Colors> getTreeMap() {

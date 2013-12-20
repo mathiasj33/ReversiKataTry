@@ -133,6 +133,11 @@ public class SpielfeldFactory {
 		sp.setForInit(Colors.BLACK, new Pos(0,4));
 		return sp;
 	}
+	
+	public static Spielfeld createDirectionsIteratorSpielfeld() {
+		sp = new Spielfeld(3);
+		return sp;
+	}
 
 
 }
