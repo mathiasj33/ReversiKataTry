@@ -13,7 +13,7 @@ import de.rmrw.ReversiKata.code.Spielfeld;
 public class DirectionIteratorTest {
 
 	@Test
-	public final void testDirectionIterator() {
+	public final void testDirectionIteratorLinksOben() {
 		Set<Pos> resultSet = new HashSet<Pos>();
 		Spielfeld sp = SpielfeldFactory.createDirectionsIteratorSpielfeld();
 		//o o o
@@ -38,7 +38,6 @@ public class DirectionIteratorTest {
 			resultSet.add(dit.next());
 		}
 		Assert.assertEquals(3, resultSet.size());
-		for(Pos p : resultSet) System.out.println(p);
 	}
 
 }

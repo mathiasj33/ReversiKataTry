@@ -58,10 +58,10 @@ public class Spielfeld {
 			LineIterator lI = createLineIterator(startPos, p);
 			lI.next(); // Start-Position überspringen 
 
-			// erster Nachbar muss existieren und die entgegengesetzte Farbe haben
-			if (!lI.hasNext()) continue;
+			// erster Nachbar muss existieren, weil der DirectionIterator sonst diese Richtung nicht zurückgeben würde
 			Pos neighbourPos = lI.next(); 
-			if (getColor(neighbourPos)==Colors.VOID || getColor(neighbourPos) == c)
+			// und er muss die entgegengesetzte Farbe haben
+			if (getColor(neighbourPos).equals(Colors.VOID) || getColor(neighbourPos).equals(c))
 				continue;
 			aL.add(neighbourPos);
 			// Unsere Startposition hat jetzt also einen Nachbarn in der anderen Farbe.
@@ -89,7 +89,7 @@ public class Spielfeld {
 	public Set<Pos> woKann(Colors color) {
 		Set<Pos> result = new HashSet<Pos>();
 		for(Pos p : map.keySet()) {
-			if(esGibtEinenWegVonPosZuFarbe(p,color) && map.get(p) == Colors.VOID) result.add(p);
+			if(map.get(p) == Colors.VOID && esGibtEinenWegVonPosZuFarbe(p,color)) result.add(p);
 		}
 		return result;
 	}
@@ -123,14 +123,14 @@ public class Spielfeld {
 		return map;
 	}
 	
-	public void setzeSpielstein(Colors color, Pos p) {
-		if(woKann(color).contains(p)) {
-			setForInit(color, p);
-			ArrayList<Pos> positions = berechneUndPruefeWeg(p, color);
-			for(Pos pos : positions) {
-				map.put(pos, color);
-			}
-		}
+	public boolean setzeSpielstein(Colors color, Pos p) {
+		ArrayList<Pos> positions = berechneUndPruefeWeg(p, color);
+		if (positions.size()==0)
+			return false;
+		setForInit(color, p);
+		for(Pos pos : positions)
+			map.put(pos, color);
+		return true;
 	}
 	
 	public int anzahl(Colors color) {
