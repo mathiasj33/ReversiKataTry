@@ -5,26 +5,29 @@ import java.util.Set;
 
 public class ReversiSpiel {
 	
-	private ArrayList<ReversiView> views;
+	private ArrayList<IFReversiView> views;
 	private int size;
 	private Spielfeld spielfeld;
 	private Spieler spieler1;
 	private Spieler spieler2;
 	private boolean ersterSpieler = true;
 	
-	public ReversiSpiel(int size_, ArrayList<ReversiView> views_) {
+	public ReversiSpiel(int size_, ArrayList<IFReversiView> views_) {
 		views = views_;
 		setSize(size_);
 		spielfeld = new Spielfeld(getSize());
-		getSpielfeld().setForInit(Colors.WHITE, new Pos(3,3));
-		getSpielfeld().setForInit(Colors.BLACK, new Pos(4,3));
-		getSpielfeld().setForInit(Colors.BLACK, new Pos(3,4));
-		getSpielfeld().setForInit(Colors.WHITE, new Pos(4,4)); 
+	}
+
+	public void initSpiel() {
+		getSpielfeld().setForInit(Colors.WHITE, new Pos(getSize()/2-1,getSize()/2-1));
+		getSpielfeld().setForInit(Colors.BLACK, new Pos(getSize()/2,getSize()/2-1));
+		getSpielfeld().setForInit(Colors.BLACK, new Pos(getSize()/2-1,getSize()/2));
+		getSpielfeld().setForInit(Colors.WHITE, new Pos(getSize()/2,getSize()/2));
 		updateAllViews();
 	}
 
 	private void updateAllViews() {
-		for(ReversiView v : views) {
+		for(IFReversiView v : views) {
 			v.update();
 		}	
 	}
@@ -60,10 +63,11 @@ public class ReversiSpiel {
 	public void setzeSpielstein(Spieler s, Pos p) {
 		getSpielfeld().setzeSpielstein(s.getColor(), p);
 		updateAllViews();
-		if(spieler1.isAmZug()) {
+		if(spieler1.isAmZug() && getSpielfeld().woKann(spieler2.getColor()).size()!=0) {
 			spieler2.setAmZug(true);
 			spieler1.setAmZug(false);
-		} else {
+		} 
+		else if(spieler2.isAmZug() && getSpielfeld().woKann(spieler1.getColor()).size()!=0) {
 			spieler1.setAmZug(true);
 			spieler2.setAmZug(false);
 		}

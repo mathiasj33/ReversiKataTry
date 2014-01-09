@@ -1,5 +1,5 @@
 package de.rmrw.ReversiKata.code;
 
-public interface ReversiView {
+public interface IFReversiView {
 	public void update();
 }
