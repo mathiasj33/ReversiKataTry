@@ -1,6 +1,10 @@
 package de.rmrw.ReversiKata.test;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,7 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.mockito.Mockito.*;
 import de.rmrw.ReversiKata.code.Colors;
 import de.rmrw.ReversiKata.code.Pos;
 import de.rmrw.ReversiKata.code.ReversiSpiel;
