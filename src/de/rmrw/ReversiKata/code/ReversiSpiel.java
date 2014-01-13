@@ -3,16 +3,18 @@ package de.rmrw.ReversiKata.code;
 import java.util.ArrayList;
 import java.util.Set;
 
+import de.rmrw.ReversiKata.views.IFSpielView;
+
 public class ReversiSpiel {
 	
-	private ArrayList<IFReversiView> views;
+	private ArrayList<IFSpielView> views;
 	private int size;
 	private Spielfeld spielfeld;
 	private Spieler spieler1;
 	private Spieler spieler2;
 	private boolean ersterSpieler = true;
 	
-	public ReversiSpiel(int size_, ArrayList<IFReversiView> views_) {
+	public ReversiSpiel(int size_, ArrayList<IFSpielView> views_) {
 		views = views_;
 		setSize(size_);
 		spielfeld = new Spielfeld(getSize());
@@ -27,7 +29,7 @@ public class ReversiSpiel {
 	}
 
 	private void updateAllViews() {
-		for(IFReversiView v : views) {
+		for(IFSpielView v : views) {
 			v.update();
 		}	
 	}

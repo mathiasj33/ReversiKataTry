@@ -1,13 +1,17 @@
-package de.rmrw.ReversiKata.code;
+package de.rmrw.ReversiKata.MainSpikes;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class ReversiMain {
+import de.rmrw.ReversiKata.code.Colors;
+import de.rmrw.ReversiKata.code.Pos;
+import de.rmrw.ReversiKata.code.Spielfeld;
+
+public class ReversiMainConsole {
 
 	static final int spielfeldgroesse=8;
 	private Spielfeld spielfeld;
-	public ReversiMain() {
+	public ReversiMainConsole() {
 		spielfeld = new Spielfeld(spielfeldgroesse);
 		spielfeld.setForInit(Colors.WHITE, new Pos(3,3));
 		spielfeld.setForInit(Colors.WHITE, new Pos(4,4));
@@ -25,7 +29,7 @@ public class ReversiMain {
 
 	public static void main(String args[])
 	{
-		ReversiMain spiel = new ReversiMain();
+		ReversiMainConsole spiel = new ReversiMainConsole();
 		Colors dran = Colors.WHITE;
 		while (true) {
 			int zeile = 0;

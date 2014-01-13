@@ -18,15 +18,15 @@ import org.mockito.Mockito;
 import de.rmrw.ReversiKata.code.Colors;
 import de.rmrw.ReversiKata.code.Pos;
 import de.rmrw.ReversiKata.code.ReversiSpiel;
-import de.rmrw.ReversiKata.code.IFReversiView;
+import de.rmrw.ReversiKata.views.IFSpielView;
 import de.rmrw.ReversiKata.code.Spieler;
 import de.rmrw.ReversiKata.code.Spielfeld;
 
 public class SpielTest {
 
-	private ArrayList<IFReversiView> views = null;
-	private IFReversiView mockView1 = null;
-	private IFReversiView mockView2 = null;
+	private ArrayList<IFSpielView> views = null;
+	private IFSpielView mockView1 = null;
+	private IFSpielView mockView2 = null;
 	private ReversiSpiel reversi1 = null;
 	private ReversiSpiel reversi2 = null;
 	private Spieler spieler1 = null;
@@ -34,10 +34,10 @@ public class SpielTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		views = new ArrayList<IFReversiView>();
-		mockView1 = mock(IFReversiView.class);
+		views = new ArrayList<IFSpielView>();
+		mockView1 = mock(IFSpielView.class);
 		views.add(mockView1);
-		mockView2 = mock(IFReversiView.class);
+		mockView2 = mock(IFSpielView.class);
 		views.add(mockView2);
 		reversi1 = new ReversiSpiel(8,views); // besetzt die mittleren Felder und ruft schon 1mal update für alle Views auf
 		reversi1.initSpiel();

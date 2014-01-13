@@ -12,5 +12,6 @@ import org.junit.runners.Suite;
 	LineIteratorTest.class, 
 	PosTest.class,
 	DirectionIteratorTest.class,
-	SpielTest.class} )
+	SpielTest.class,
+	SpielfeldFeldZustandTest.class} )
 public final class AllTests {}
