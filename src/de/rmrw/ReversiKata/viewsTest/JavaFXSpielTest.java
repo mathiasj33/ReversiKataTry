@@ -1,5 +1,6 @@
 package de.rmrw.ReversiKata.viewsTest;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import de.rmrw.ReversiKata.code.IFSpielModel;
-import de.rmrw.ReversiKata.views.JavaFXSpielView;
+import de.rmrw.ReversiKata.views.JavaFXSpiel;
 
 public class JavaFXSpielTest {
 
@@ -23,8 +24,8 @@ public class JavaFXSpielTest {
 	public final void testKonstruktor() {
 		IFSpielModel mockModel = Mockito.mock(IFSpielModel.class);
 		
-		JavaFXSpielView spielView = 
-				new JavaFXSpielView(mockModel, 
+		JavaFXSpiel spielView = 
+				new JavaFXSpiel(mockModel, 
 				// Parameter der einzelnen Felder des Spielfelds: 
 				50,            		// Pixel-Groesse
 				GRUNDFARBE,   		// Grundfarbe
@@ -35,8 +36,12 @@ public class JavaFXSpielTest {
 				);
 		
 		Mockito.verify(mockModel).addView(spielView);
+		Assert.assertTrue(spielView instanceof BorderPane);
 		Assert.assertTrue(spielView.getJavaFXSpielfeldView() instanceof GridPane);
 		Assert.assertTrue(spielView.getJavaFXSpielerView() instanceof VBox);
 		Assert.assertNotNull(spielView.getModel());
+		// Was ich alles nicht abfragen kann - oder evtl. später, wenn die Implementierung vorliegt:
+		// 1. Sind spielView.getJavaFXSpielfeldView() und spielView.getJavaFXSpielerView() genau die Ergebnisse von spielView.getChildren()?
+		// 2. Wird im Konstruktor einmalig "update()" für spielView.getJavaFXSpielfeldView() und spielView.getJavaFXSpielerView() aufgerufen?
 	}
 }
