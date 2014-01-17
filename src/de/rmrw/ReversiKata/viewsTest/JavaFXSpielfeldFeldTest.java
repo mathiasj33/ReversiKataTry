@@ -5,6 +5,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import javafx.scene.paint.Color;
 
 import org.junit.Assert;
@@ -12,8 +13,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.rmrw.ReversiKata.code.IFSpielModel;
-import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeld;
 import de.rmrw.ReversiKata.code.SpielfeldFeldZustand;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeld;
 
 
 public class JavaFXSpielfeldFeldTest {
