@@ -3,6 +3,9 @@ package de.rmrw.ReversiKata.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import de.rmrw.ReversiKata.viewsTest.JavaFXSpielTest;
+import de.rmrw.ReversiKata.viewsTest.JavaFXSpielfeldFeldTest;
+
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
@@ -13,5 +16,7 @@ import org.junit.runners.Suite;
 	PosTest.class,
 	DirectionIteratorTest.class,
 	SpielTest.class,
-	SpielfeldFeldZustandTest.class} )
+	SpielfeldFeldZustandTest.class,
+	JavaFXSpielfeldFeldTest.class,
+	JavaFXSpielTest.class} )
 public final class AllTests {}

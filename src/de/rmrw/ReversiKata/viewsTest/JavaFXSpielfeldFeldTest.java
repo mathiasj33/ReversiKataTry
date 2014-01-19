@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import javafx.scene.paint.Color;
 
 import org.junit.Assert;
@@ -15,30 +14,35 @@ import org.junit.Test;
 import de.rmrw.ReversiKata.code.IFSpielModel;
 import de.rmrw.ReversiKata.code.SpielfeldFeldZustand;
 import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeld;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeldProperties;
 
 
 public class JavaFXSpielfeldFeldTest {
 	
-	private static final Color ANGEDEUTETEFARBESPIELER2 = Color.LIGHTCORAL;
-	private static final Color ANGEDEUTETEFARBESPIELER1 = Color.LIGHTBLUE;
-	private static final Color FARBESPIELER2 = Color.RED;
-	private static final Color FARBESPIELER1 = Color.BLUE;
-	private static final Color GRUNDFARBE = Color.BEIGE;
-	private JavaFXSpielfeldFeld feld = null;
-	private IFSpielModel mockModel = null;
+	private static final Color ANGEDEUTETEFARBESPIELER2		= Color.LIGHTCORAL;
+	private static final Color ANGEDEUTETEFARBESPIELER1		= Color.LIGHTBLUE;
+	private static final Color FARBESPIELER2				= Color.RED;
+	private static final Color FARBESPIELER1				= Color.BLUE;
+	private static final Color GRUNDFARBE					= Color.BEIGE;
+	
+	private JavaFXSpielfeldFeld 			feld 					= null;
+	private JavaFXSpielfeldFeldProperties 	spielfeldFeldProperties = null;
+	private IFSpielModel 					mockModel 				= null;
 	
 	@Before
 	public void setUp() throws Exception {
 		mockModel = mock(IFSpielModel.class);
+		spielfeldFeldProperties = new JavaFXSpielfeldFeldProperties(50,            // Groesse
+																	GRUNDFARBE,   // Grundfarbe
+																	FARBESPIELER1,    // Farbe Spieler1
+																	FARBESPIELER2,     // Farbe Spieler2
+																	ANGEDEUTETEFARBESPIELER1, // Angedeutete Farbe Sp1
+																	ANGEDEUTETEFARBESPIELER2  // Angedeutete Farbe Sp2
+																	);
 		feld = new JavaFXSpielfeldFeld(mockModel,     // Modell zum View
 										0,             // Zeile
 										0,             // Spalte
-										50,            // Groesse
-										GRUNDFARBE,   // Grundfarbe
-										FARBESPIELER1,    // Farbe Spieler1
-										FARBESPIELER2,     // Farbe Spieler2
-										ANGEDEUTETEFARBESPIELER1, // Angedeutete Farbe Sp1
-										ANGEDEUTETEFARBESPIELER2  // Angedeutete Farbe Sp2
+										spielfeldFeldProperties
 										);
 	}
 

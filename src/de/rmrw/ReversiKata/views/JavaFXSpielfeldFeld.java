@@ -17,11 +17,9 @@ public class JavaFXSpielfeldFeld extends Pane {
 
 	private int   zeile;
 	private int   spalte;
-	private Color farbeSpieler1;
-	private Color farbeSpieler2;
-	private Color angedeuteteFarbeSpieler1;
-	private Color angedeuteteFarbeSpieler2;
+	private JavaFXSpielfeldFeldProperties spielfeldFeldProperties; 
 	
+
 	private Rectangle rect = null;
 	private Circle kreis = null;
 
@@ -30,15 +28,11 @@ public class JavaFXSpielfeldFeld extends Pane {
 	public JavaFXSpielfeldFeld(IFSpielModel model,
 							int zeile,
 							int spalte,
-							double groesse,
-							Color grundfarbe,
-							Color farbeSpieler1,
-							Color farbeSpieler2, 
-							Color angedeuteteFarbeSpieler1,
-							Color angedeuteteFarbeSpieler2) {
+							JavaFXSpielfeldFeldProperties properties) {
 		super();
-		this.setMinSize(groesse, groesse);
-		rect = new Rectangle(groesse, groesse, grundfarbe);
+		
+		this.setMinSize(properties.getPixelSize(), properties.getPixelSize());
+		rect = new Rectangle(properties.getPixelSize(), properties.getPixelSize(), properties.getGrundFarbe());
 		rect.setArcHeight(GROESSEABGERUNDETEECKENINPROZENT);
 		rect.setArcWidth(GROESSEABGERUNDETEECKENINPROZENT);
 		rect.setX(0);
@@ -46,10 +40,7 @@ public class JavaFXSpielfeldFeld extends Pane {
 		this.model = model;
 		this.zeile = zeile;
 		this.spalte = spalte;
-		this.farbeSpieler1 = farbeSpieler1;
-		this.farbeSpieler2 = farbeSpieler2;
-		this.angedeuteteFarbeSpieler1 = angedeuteteFarbeSpieler1;
-		this.angedeuteteFarbeSpieler2 = angedeuteteFarbeSpieler2;
+		this.spielfeldFeldProperties = properties;
 		this.kreis = new Circle(rect.getWidth()/2.0, 
 								rect.getHeight()/2.0,
 								rect.getWidth()/2.0*PROZENTKREISVONFELD/100, 
@@ -106,12 +97,21 @@ public class JavaFXSpielfeldFeld extends Pane {
 			kreis.setFill(Color.TRANSPARENT);
 	}
 	
+	
+	public JavaFXSpielfeldFeldProperties getSpielfeldFeldProperties() {
+		return spielfeldFeldProperties;
+	}
+
+	public void setSpielfeldFeldProperties(JavaFXSpielfeldFeldProperties properties) {
+		this.spielfeldFeldProperties = properties;
+	}
+
 	public Color getAngedeuteteFarbeSpieler1() {
-		return angedeuteteFarbeSpieler1;
+		return spielfeldFeldProperties.getAngedeuteteFarbeSpieler1();
 	}
 
 	public Color getAngedeuteteFarbeSpieler2() {
-		return angedeuteteFarbeSpieler2;
+		return spielfeldFeldProperties.getAngedeuteteFarbeSpieler2();
 	}
 
 	public Paint getCircleColor() {
@@ -134,9 +134,9 @@ public class JavaFXSpielfeldFeld extends Pane {
 		System.out.println("JavaFXSpielfeldFeld.update()");
 		SpielfeldFeldZustand zustand = getModel().getFeldZustand(getZeile(),getSpalte());
 		if (zustand==SpielfeldFeldZustand.BESETZT1)
-			kreis.setFill(farbeSpieler1);
+			kreis.setFill(spielfeldFeldProperties.getFarbeSpieler1());
 		if (zustand==SpielfeldFeldZustand.BESETZT2)
-			kreis.setFill(farbeSpieler2);
+			kreis.setFill(spielfeldFeldProperties.getFarbeSpieler2());
 		if (zustand==SpielfeldFeldZustand.LEER_UND_BESETZBAR1 || 
 			zustand==SpielfeldFeldZustand.LEER_UND_BESETZBAR2 ||
 			zustand==SpielfeldFeldZustand.LEER_UND_NICHT_BESETZBAR)

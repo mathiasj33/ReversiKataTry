@@ -1,5 +1,7 @@
 package de.rmrw.ReversiKata.viewsTest;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -39,9 +41,11 @@ public class JavaFXSpielTest {
 		Assert.assertTrue(spielView instanceof BorderPane);
 		Assert.assertTrue(spielView.getJavaFXSpielfeldView() instanceof GridPane);
 		Assert.assertTrue(spielView.getJavaFXSpielerView() instanceof VBox);
+		ObservableList<Node> children = spielView.getChildren();
+		Assert.assertTrue(children.contains(spielView.getJavaFXSpielfeldView()));
+		Assert.assertTrue(children.contains(spielView.getJavaFXSpielerView()));
 		Assert.assertNotNull(spielView.getModel());
 		// Was ich alles nicht abfragen kann - oder evtl. später, wenn die Implementierung vorliegt:
-		// 1. Sind spielView.getJavaFXSpielfeldView() und spielView.getJavaFXSpielerView() genau die Ergebnisse von spielView.getChildren()?
-		// 2. Wird im Konstruktor einmalig "update()" für spielView.getJavaFXSpielfeldView() und spielView.getJavaFXSpielerView() aufgerufen?
+		// 1. Wird im Konstruktor einmalig "update()" für spielView.getJavaFXSpielfeldView() und spielView.getJavaFXSpielerView() aufgerufen?
 	}
 }
