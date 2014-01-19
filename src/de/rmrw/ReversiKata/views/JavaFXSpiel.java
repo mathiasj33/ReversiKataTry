@@ -22,10 +22,10 @@ public class JavaFXSpiel extends BorderPane implements IFSpielView{
 	private JavaFXSpielerView spielerView;
 
 	
-	public JavaFXSpiel(IFSpielModel model_, int pixelSize, Color grundFarbe, Color farbeSpieler1, Color farbeSpieler2, Color angedeuteteFarbeSpieler1, Color angedeuteteFarbeSpieler2) {
+	public JavaFXSpiel(IFSpielModel model_, JavaFXSpielfeldFeldProperties spielfeldFeldProperties_) {
 		setModel(model_);
 		setPadding(new Insets(40, 40, 40, 40));
-		spielfeldFeldProperties = new JavaFXSpielfeldFeldProperties(pixelSize, grundFarbe, farbeSpieler1, farbeSpieler2, angedeuteteFarbeSpieler1, angedeuteteFarbeSpieler2);
+		spielfeldFeldProperties = spielfeldFeldProperties_;
 		spielfeldView = new JavaFXSpielfeldView(model, spielfeldFeldProperties);
 		this.setCenter(spielfeldView);
 		spielerView = new JavaFXSpielerView(10);

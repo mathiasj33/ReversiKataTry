@@ -21,14 +21,18 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		IFSpielModel mockModel = Mockito.mock(IFSpielModel.class);
-		JavaFXSpiel sV = new JavaFXSpiel(
-				mockModel,
-				50,            		// Pixel-Groesse
-				GRUNDFARBE,   		// Grundfarbe
-				FARBESPIELER1,    	// Farbe Spieler1
-				FARBESPIELER2,     	// Farbe Spieler2
+		JavaFXSpielfeldFeldProperties spielfeldFeldProperties = new JavaFXSpielfeldFeldProperties(
+				50,            // Groesse
+				GRUNDFARBE,   // Grundfarbe
+				FARBESPIELER1,    // Farbe Spieler1
+				FARBESPIELER2,     // Farbe Spieler2
 				ANGEDEUTETEFARBESPIELER1, // Angedeutete Farbe Sp1
 				ANGEDEUTETEFARBESPIELER2  // Angedeutete Farbe Sp2
+				);
+
+		JavaFXSpiel sV = new JavaFXSpiel(
+				mockModel,
+				spielfeldFeldProperties
 				);
 		Scene s = new Scene(sV,500,500);
 		s.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

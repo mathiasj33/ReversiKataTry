@@ -13,6 +13,8 @@ import org.mockito.Mockito;
 
 import de.rmrw.ReversiKata.code.IFSpielModel;
 import de.rmrw.ReversiKata.views.JavaFXSpiel;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeld;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeldProperties;
 
 public class JavaFXSpielTest {
 
@@ -26,9 +28,7 @@ public class JavaFXSpielTest {
 	public final void testKonstruktor() {
 		IFSpielModel mockModel = Mockito.mock(IFSpielModel.class);
 		
-		JavaFXSpiel spielView = 
-				new JavaFXSpiel(mockModel, 
-				// Parameter der einzelnen Felder des Spielfelds: 
+		JavaFXSpielfeldFeldProperties spielfeldFeldProperties = new JavaFXSpielfeldFeldProperties(
 				50,            		// Pixel-Groesse
 				GRUNDFARBE,   		// Grundfarbe
 				FARBESPIELER1,    	// Farbe Spieler1
@@ -36,6 +36,11 @@ public class JavaFXSpielTest {
 				ANGEDEUTETEFARBESPIELER1, // Angedeutete Farbe Sp1
 				ANGEDEUTETEFARBESPIELER2  // Angedeutete Farbe Sp2
 				);
+		
+		JavaFXSpiel spielView = 
+				new JavaFXSpiel(mockModel, 
+								// Parameter der einzelnen Felder des Spielfelds: 
+								spielfeldFeldProperties);
 		
 		Mockito.verify(mockModel).addView(spielView);
 		Assert.assertTrue(spielView instanceof BorderPane);
