@@ -1,9 +1,13 @@
 package de.rmrw.ReversiKata.code;
 
+import java.util.EnumSet;
+
 public enum Colors {
 	BLACK,
 	WHITE,
 	VOID;
+	
+	public static final EnumSet<Colors> PLAYERCOLORS = EnumSet.range(BLACK, WHITE);
 
 	@Override
 	public String toString() {

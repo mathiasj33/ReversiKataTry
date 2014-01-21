@@ -1,11 +1,7 @@
 package de.rmrw.ReversiKata.views;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import de.rmrw.ReversiKata.code.IFSpielModel;
 
 public class JavaFXSpiel extends BorderPane implements IFSpielView{
@@ -13,12 +9,8 @@ public class JavaFXSpiel extends BorderPane implements IFSpielView{
 	private IFSpielModel model 										= null;
 	
 	private JavaFXSpielfeldFeldProperties spielfeldFeldProperties 	= null;
-	
-	
-//	@Inject
 	private JavaFXSpielfeldView spielfeldView;
 
-//	@Inject
 	private JavaFXSpielerView spielerView;
 
 	
@@ -26,22 +18,38 @@ public class JavaFXSpiel extends BorderPane implements IFSpielView{
 		setModel(model_);
 		setPadding(new Insets(40, 40, 40, 40));
 		spielfeldFeldProperties = spielfeldFeldProperties_;
-		spielfeldView = new JavaFXSpielfeldView(model, spielfeldFeldProperties);
-		this.setCenter(spielfeldView);
-		spielerView = new JavaFXSpielerView(10);
-		this.setLeft(spielerView);
-		model.addView(this);
 	}
 	
-//	@PostConstruct
-//	public void initAfterConstruction()
-//	{
-//		
-//	}
+	public void init() {
+		spielfeldView = createJavaFXSpielfeldView();
+		spielfeldView.init();
+		subClassSetCenter(spielfeldView);
+		spielerView = createJavaFXSpielerView();
+		subClassSetLeft(spielerView);
+		model.addView(this);
+	}
 
+	public void subClassSetCenter(JavaFXSpielfeldView sv) {
+		super.setCenter(sv);
+	}
+
+	
+	public void subClassSetLeft(JavaFXSpielerView sv) {
+		super.setLeft(sv);
+	}
+
+	public JavaFXSpielerView createJavaFXSpielerView() {
+		return new JavaFXSpielerView(10);
+	}
+
+	public JavaFXSpielfeldView createJavaFXSpielfeldView() {
+		return new JavaFXSpielfeldView(model, spielfeldFeldProperties);
+	}
+	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
+		spielfeldView.update();
+		spielerView.update();
 	}
 
 	public IFSpielModel getModel() {

@@ -1,4 +1,6 @@
-package de.rmrw.ReversiKata.views;
+package de.rmrw.ReversiKata.MainSpikes;
+
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -8,10 +10,13 @@ import javafx.stage.Stage;
 import org.mockito.Mockito;
 
 import de.rmrw.ReversiKata.code.IFSpielModel;
+import de.rmrw.ReversiKata.code.ReversiSpiel;
+import de.rmrw.ReversiKata.views.IFSpielView;
+import de.rmrw.ReversiKata.views.JavaFXSpiel;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeldProperties;
 
-public class Main extends Application {
+public class ReversiMainJavaFX extends Application {
 	
-	private IFSpielModel model;
 	private static final Color ANGEDEUTETEFARBESPIELER2 = Color.LIGHTCORAL;
 	private static final Color ANGEDEUTETEFARBESPIELER1 = Color.LIGHTBLUE;
 	private static final Color FARBESPIELER2 = Color.RED;
@@ -20,7 +25,11 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		IFSpielModel mockModel = Mockito.mock(IFSpielModel.class);
+		ReversiSpiel model = new ReversiSpiel(8, new ArrayList<IFSpielView>());
+		model.initSpiel();
+		model.registriereSpieler("Mathias");
+		model.registriereSpieler("Robert");
+		
 		JavaFXSpielfeldFeldProperties spielfeldFeldProperties = new JavaFXSpielfeldFeldProperties(
 				50,            // Groesse
 				GRUNDFARBE,   // Grundfarbe
@@ -31,7 +40,7 @@ public class Main extends Application {
 				);
 
 		JavaFXSpiel sV = new JavaFXSpiel(
-				mockModel,
+				model,
 				spielfeldFeldProperties
 				);
 		Scene s = new Scene(sV,500,500);

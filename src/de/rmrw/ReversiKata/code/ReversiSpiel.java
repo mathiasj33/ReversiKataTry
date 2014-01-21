@@ -5,7 +5,7 @@ import java.util.Set;
 
 import de.rmrw.ReversiKata.views.IFSpielView;
 
-public class ReversiSpiel {
+public class ReversiSpiel implements IFSpielModel {
 	
 	private ArrayList<IFSpielView> views;
 	private int size;
@@ -79,5 +79,6 @@ public class ReversiSpiel {
 		if(spieler1.isAmZug()) return spieler1;
 		return spieler2;
 	}
+
 
 }

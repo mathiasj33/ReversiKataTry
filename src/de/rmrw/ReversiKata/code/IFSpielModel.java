@@ -9,4 +9,6 @@ public interface IFSpielModel {
 	public SpielfeldFeldZustand getFeldZustand(int zeile, int spalte);
 	
 	public void addView(IFSpielView view);
+	
+	public int getSize();
 }
