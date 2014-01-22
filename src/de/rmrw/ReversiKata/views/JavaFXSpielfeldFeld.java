@@ -1,7 +1,5 @@
 package de.rmrw.ReversiKata.views;
 
-import de.rmrw.ReversiKata.code.IFSpielModel;
-import de.rmrw.ReversiKata.code.SpielfeldFeldZustand;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,10 +21,7 @@ public class JavaFXSpielfeldFeld extends Pane {
 	private Rectangle rect = null;
 	private Circle kreis = null;
 
-	private IFSpielModel model;
-
-	public JavaFXSpielfeldFeld(IFSpielModel model,
-							int zeile,
+	public JavaFXSpielfeldFeld(int zeile,
 							int spalte,
 							JavaFXSpielfeldFeldProperties properties) {
 		super();
@@ -37,7 +32,6 @@ public class JavaFXSpielfeldFeld extends Pane {
 		rect.setArcWidth(GROESSEABGERUNDETEECKENINPROZENT);
 		rect.setX(0);
 		rect.setY(0);
-		this.model = model;
 		this.zeile = zeile;
 		this.spalte = spalte;
 		this.spielfeldFeldProperties = properties;
@@ -47,55 +41,9 @@ public class JavaFXSpielfeldFeld extends Pane {
 								Color.TRANSPARENT);
 		this.getChildren().add(rect);
 		this.getChildren().add(kreis);
-		
-		kreis.setOnMousePressed(new EventHandler<MouseEvent>() {
-			
-			@Override
-			public void handle(MouseEvent event) {
-				onMousePressed();
-			}
-
-		});
-		
-		kreis.setOnMouseEntered(new EventHandler<MouseEvent>() {
-
-			@Override
-			public void handle(MouseEvent event) {
-				onMouseEnter();
-			}
-
-		});
-
-		kreis.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				
-				onMouseExited();
-			}
-
-		});
-		update();
 	}
 
-	public void onMousePressed() {
-		if (getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR1)
-			getModel().besetzeFeld(getZeile(),getSpalte(),1);
-		if (getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR2)
-			getModel().besetzeFeld(getZeile(),getSpalte(),2);
-	}
-
-	public void onMouseEnter() {
-		if (getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR1)
-			kreis.setFill(getAngedeuteteFarbeSpieler1());
-		if (getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR2)
-			kreis.setFill(getAngedeuteteFarbeSpieler2());
-	}
-
-	public void onMouseExited() {
-		if (getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR1 ||
-			getModel().getFeldZustand(getZeile(),getSpalte())==SpielfeldFeldZustand.LEER_UND_BESETZBAR2)
-			kreis.setFill(Color.TRANSPARENT);
-	}
+	
 	
 	
 	public JavaFXSpielfeldFeldProperties getSpielfeldFeldProperties() {
@@ -125,22 +73,21 @@ public class JavaFXSpielfeldFeld extends Pane {
 	public int getSpalte() {
 		return spalte;
 	}
-
-	public IFSpielModel getModel() {
-		return model;
+	
+	public void setFeldOnMousePressed(EventHandler<MouseEvent> e) {
+		kreis.setOnMousePressed(e);
 	}
 	
-	public void update() {
-		System.out.println("JavaFXSpielfeldFeld.update()");
-		SpielfeldFeldZustand zustand = getModel().getFeldZustand(getZeile(),getSpalte());
-		if (zustand==SpielfeldFeldZustand.BESETZT1)
-			kreis.setFill(spielfeldFeldProperties.getFarbeSpieler1());
-		if (zustand==SpielfeldFeldZustand.BESETZT2)
-			kreis.setFill(spielfeldFeldProperties.getFarbeSpieler2());
-		if (zustand==SpielfeldFeldZustand.LEER_UND_BESETZBAR1 || 
-			zustand==SpielfeldFeldZustand.LEER_UND_BESETZBAR2 ||
-			zustand==SpielfeldFeldZustand.LEER_UND_NICHT_BESETZBAR)
-			kreis.setFill(Color.TRANSPARENT);
+	public void setFeldOnMouseEntered(EventHandler<MouseEvent> e) {
+		kreis.setOnMouseEntered(e);
+	}
+	
+	public void setFeldOnMouseExited(EventHandler<MouseEvent> e) {
+		kreis.setOnMouseExited(e);
+	}
+	
+	public void setKreisFill(Color c) {
+		kreis.setFill(c);
 	}
 
 

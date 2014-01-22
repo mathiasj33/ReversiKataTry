@@ -80,5 +80,23 @@ public class ReversiSpiel implements IFSpielModel {
 		return spieler2;
 	}
 
+	@Override
+	public void besetzeFeld(int zeile, int spalte, int spielerNummer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SpielfeldFeldZustand getFeldZustand(int zeile, int spalte) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addView(IFSpielView view) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

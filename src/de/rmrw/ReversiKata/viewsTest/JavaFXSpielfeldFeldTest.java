@@ -13,8 +13,8 @@ import org.junit.Test;
 
 import de.rmrw.ReversiKata.code.IFSpielModel;
 import de.rmrw.ReversiKata.code.SpielfeldFeldZustand;
-import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeld;
 import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeldProperties;
+import de.rmrw.ReversiKata.views.JavaFXSpielfeldFeldView;
 
 
 public class JavaFXSpielfeldFeldTest {
@@ -25,7 +25,7 @@ public class JavaFXSpielfeldFeldTest {
 	private static final Color FARBESPIELER1				= Color.BLUE;
 	private static final Color GRUNDFARBE					= Color.BEIGE;
 	
-	private JavaFXSpielfeldFeld 			feld 					= null;
+	private JavaFXSpielfeldFeldView 			feld 					= null;
 	private JavaFXSpielfeldFeldProperties 	spielfeldFeldProperties = null;
 	private IFSpielModel 					mockModel 				= null;
 	
@@ -39,7 +39,7 @@ public class JavaFXSpielfeldFeldTest {
 																	ANGEDEUTETEFARBESPIELER1, // Angedeutete Farbe Sp1
 																	ANGEDEUTETEFARBESPIELER2  // Angedeutete Farbe Sp2
 																	);
-		feld = new JavaFXSpielfeldFeld(mockModel,     // Modell zum View
+		feld = new JavaFXSpielfeldFeldView(mockModel,     // Modell zum View
 										0,             // Zeile
 										0,             // Spalte
 										spielfeldFeldProperties
@@ -53,20 +53,20 @@ public class JavaFXSpielfeldFeldTest {
 	
 	@Test
 	public final void testOnMouseEnterAndExit() {
-		feld.onMouseEnter();
+		feld.onMouseEntered();
 		Assert.assertEquals(Color.TRANSPARENT, feld.getCircleColor());
 		feld.onMouseExited();
 		
 		when(mockModel.getFeldZustand(0, 0)).thenReturn(SpielfeldFeldZustand.LEER_UND_BESETZBAR1);
 		feld.update();
-		feld.onMouseEnter();
+		feld.onMouseEntered();
 		Assert.assertEquals(ANGEDEUTETEFARBESPIELER1, feld.getCircleColor());
 		feld.onMouseExited();
 		Assert.assertEquals(Color.TRANSPARENT, feld.getCircleColor());
 
 		when(mockModel.getFeldZustand(0, 0)).thenReturn(SpielfeldFeldZustand.LEER_UND_BESETZBAR2);
 		feld.update();
-		feld.onMouseEnter();
+		feld.onMouseEntered();
 		Assert.assertEquals(ANGEDEUTETEFARBESPIELER2, feld.getCircleColor());
 		feld.onMouseExited();
 		Assert.assertEquals(Color.TRANSPARENT, feld.getCircleColor());
@@ -74,7 +74,7 @@ public class JavaFXSpielfeldFeldTest {
 		when(mockModel.getFeldZustand(0, 0)).thenReturn(SpielfeldFeldZustand.BESETZT1);
 		feld.update();
 		Assert.assertEquals(FARBESPIELER1, feld.getCircleColor());
-		feld.onMouseEnter();
+		feld.onMouseEntered();
 		Assert.assertEquals(FARBESPIELER1, feld.getCircleColor());
 		feld.onMouseExited();
 		Assert.assertEquals(FARBESPIELER1, feld.getCircleColor());
